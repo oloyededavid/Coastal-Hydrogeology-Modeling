@@ -69,4 +69,3 @@ To overcome the chronic scarcity of long-term piezometric gauge networks in the 
 ## Research Reflection
 In rapidly urbanizing West African coastal megacities, groundwater depletion and saline intrusion along the land-ocean boundary are frequently approached purely from the perspective of over-abstraction, overlooking how aggressive surface sealing starves shallow unconfined aquifers from above. Because continuous in-situ piezometric monitoring across the Lagos coastal basin remains sparse, open-source satellite Earth Observation provides a vital observational bridge. By coupling multi-decadal spectral harmonization and terrain physics with graph-theoretical routing and MODFLOW 6 package compilation, this work demonstrates how reproducible geospatial workflows can convert raw orbital telemetry into physical boundary constraints for coastal water resource management.
 
----
