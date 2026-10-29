@@ -38,7 +38,7 @@ To overcome the chronic scarcity of long-term piezometric gauge networks in the 
 | 30-Year Recharge Capacity Difference (1995–2024) | Hydraulic Friction Manifold & Percolation Routing |
 | :---: | :---: |
 | ![Temporal Delta](figures/ARPI_Temporal_Delta_Map.png) | ![Percolation Routing](figures/Percolation_Routing_Map.png) |
-| **Differential Infiltration Loss:** Pixel-wise 30-year temporal delta ($\text{ARPI}_{1995} - \text{ARPI}_{2024}$) isolating contiguous zones of acute anthropogenic recharge loss ($> +0.20$, red) along primary highway and real-estate development axes, contrasted against stable rural recharge zones in blue. | **Least-Cost Subsurface Connectivity:** Graph-theoretical 8-connected Dijkstra path routed across the log-transformed hydraulic resistance manifold ($\log_{10} R$), tracing the primary percolation corridor from the Epe inflow source to the Lekki coastal outlet and flagging critical urban choke points ($\text{ARPI} < 0.35$). |
+| **Differential Infiltration Loss:** Pixel-wise 30-year temporal delta (1995 - 2024) isolating contiguous zones of acute anthropogenic recharge loss ($> +0.20$, red) along primary highway and real-estate development axes, contrasted against stable rural recharge zones in blue. | **Least-Cost Subsurface Connectivity:** Graph-theoretical 8-connected Dijkstra path routed across the log-transformed hydraulic resistance manifold ($\log_{10} R$), tracing the primary percolation corridor from the Epe inflow source to the Lekki coastal outlet and flagging critical urban choke points ($\text{ARPI} < 0.35$). |
 
 | Longitudinal Hydro-Spatial Transect Profile |
 | :---: |
