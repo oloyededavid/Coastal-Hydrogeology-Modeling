@@ -63,7 +63,7 @@ To overcome the chronic scarcity of long-term piezometric gauge networks in the 
 ## Key Empirical Findings
 * **Basin-wide index change:** Across the Lekki-Epe corridor the mean ARPI index fell by **5.16%** between the 1986–1996 baseline and 2024 (the notebook output). ARPI is a weighted index, not measured recharge.
 * **Urban core index change:** Within the Lekki urban core the mean ARPI index fell by **18.14%** (the notebook output). Earlier versions of this file gave over 45%, which no output supports.
-* **Subsurface Percolation Bottlenecks:** Least-cost routing along the Benin Formation gradient demonstrates that while the eastern Epe hinterland remains an active recharge source, lateral and vertical percolation toward the western coastal margin is increasingly pinched by contiguous urban choke zones falling below the $\text{ARPI} = 0.35$ threshold.
+* **Surface-resistance bottlenecks:** A least-cost path over a surface index (not a groundwater flow model, with start and end points fixed as raster positions) suggests that while the eastern Epe hinterland remains an active recharge source, lateral and vertical percolation toward the western coastal margin is increasingly pinched by contiguous urban choke zones falling below the $\text{ARPI} = 0.35$ threshold.
 * **Direct Numerical Model Readiness:** Scaling the 2024 ARPI surface against CHIRPS precipitation yields a spatially explicit 30m recharge boundary array ingested directly into `ModflowGwfrch`, eliminating the need for uniform recharge assumptions in coastal groundwater head and saltwater-intrusion simulations.
 
 ---
