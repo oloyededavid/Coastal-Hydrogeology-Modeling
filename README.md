@@ -61,8 +61,8 @@ To overcome the chronic scarcity of long-term piezometric gauge networks in the 
 ---
 
 ## Key Empirical Findings
-* **Basin-Wide Recharge Attenuation:** Across the entire Lekki-Epe corridor, mean recharge capacity declined by **18.1%** between 1995 and 2024 as built-up infrastructure expanded eastward along the peninsula.
-* **Urban Core Impervious Sealing:** Within the high-density Lekki-Ikoyi urban sector, mean recharge potential dropped by **>45%**, transforming formerly permeable barrier-island sand ridges into high-runoff impervious surfaces.
+* **Basin-wide index change:** Across the Lekki-Epe corridor the mean ARPI index fell by **5.16%** between the 1986–1996 baseline and 2024 (the notebook output). ARPI is a weighted index, not measured recharge.
+* **Urban core index change:** Within the Lekki urban core the mean ARPI index fell by **18.14%** (the notebook output). Earlier versions of this file gave over 45%, which no output supports.
 * **Subsurface Percolation Bottlenecks:** Least-cost routing along the Benin Formation gradient demonstrates that while the eastern Epe hinterland remains an active recharge source, lateral and vertical percolation toward the western coastal margin is increasingly pinched by contiguous urban choke zones falling below the $\text{ARPI} = 0.35$ threshold.
 * **Direct Numerical Model Readiness:** Scaling the 2024 ARPI surface against CHIRPS precipitation yields a spatially explicit 30m recharge boundary array ingested directly into `ModflowGwfrch`, eliminating the need for uniform recharge assumptions in coastal groundwater head and saltwater-intrusion simulations.
 
