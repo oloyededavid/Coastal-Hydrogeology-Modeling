@@ -35,7 +35,7 @@ To overcome the chronic scarcity of long-term piezometric gauge networks in the 
 | Historical Baseline ARPI (1995) | Modern Post-Urbanization ARPI (2024) |
 | :---: | :---: |
 | ![1995 Baseline](figures/1995_Baseline_ARPI.png) | ![2024 Modern](figures/2024_Modern_ARPI.png) |
-| **1995 Pre-Expansion Baseline:** Widespread high-to-moderate recharge capacity sustained across natural coastal sandy ridges, barrier islands, and undisturbed swamp forest corridors prior to intensive metropolitan expansion. | **2024 Modern State:** Severe contraction of active infiltration zones across the western Lekki-Ikoyi urban core, showing an 18.1% whole-basin ARPI reduction and localized urban attenuation exceeding 45% due to impervious surface sealing. |
+| **1995 Pre-Expansion Baseline:** Widespread high-to-moderate recharge capacity sustained across natural coastal sandy ridges, barrier islands, and undisturbed swamp forest corridors prior to intensive metropolitan expansion. | **2024 Modern State:** Severe contraction of active infiltration zones across the western Lekki-Ikoyi urban core, showing a 5.16% whole-basin reduction of the ARPI index and an 18.14% reduction in the Lekki urban core (the notebook output). |
 
 | 30-Year Recharge Capacity Difference (1995–2024) | Hydraulic Friction Manifold & Percolation Routing |
 | :---: | :---: |
