@@ -1,0 +1,101 @@
+{
+ "grid": {
+  "land_km2": 768.8,
+  "core_km2": 221.8
+ },
+ "reproduction": {
+  "basin_change_pct": 3.91,
+  "urban_core_change_pct": 12.18,
+  "mean_1995": 0.567,
+  "mean_2024": 0.5449,
+  "shift": {
+   "ndbi_shift": 0.0553,
+   "ndvi_shift": 0.1119,
+   "ref_cells": 310183
+  },
+  "notebook": {
+   "basin_change_pct": 5.16,
+   "urban_core_change_pct": 18.14,
+   "mean_1995": 0.4274,
+   "mean_2024": 0.4054,
+   "land_km2": 766.1
+  }
+ },
+ "decomposition": {
+  "share_of_mean_change_from_permeability": 0.81,
+  "share_from_vegetation": 0.19,
+  "terrain_terms_identical_in_both_epochs": true
+ },
+ "variants": {
+  "rainfall_per_epoch": {
+   "basin_change_pct": -0.41,
+   "urban_core_change_pct": 9.35,
+   "shift": {
+    "ndbi_shift": 0.0553,
+    "ndvi_shift": 0.1119,
+    "ref_cells": 310183
+   }
+  },
+  "shift_from_ghsl_never_built": {
+   "basin_change_pct": 9.87,
+   "urban_core_change_pct": 17.66,
+   "shift": {
+    "ndbi_shift": 0.0128,
+    "ndvi_shift": 0.1849,
+    "ref_cells": 609836
+   }
+  },
+  "no_sensor_shift": {
+   "basin_change_pct": 6.69,
+   "urban_core_change_pct": 14.71,
+   "shift": {
+    "ndbi_shift": 0.0,
+    "ndvi_shift": 0.0,
+    "ref_cells": 310183
+   }
+  },
+  "per_epoch_rain_and_ghsl_shift": {
+   "basin_change_pct": 6.08,
+   "urban_core_change_pct": 15.17,
+   "shift": {
+    "ndbi_shift": 0.0128,
+    "ndvi_shift": 0.1849,
+    "ref_cells": 609836
+   }
+  },
+  "without_twi_term": {
+   "basin_change_pct": 4.65,
+   "urban_core_change_pct": 15.07
+  }
+ },
+ "weight_sensitivity": {
+  "draws": 2000,
+  "basin_change_pct_p5_p50_p95": [
+   0.91,
+   3.54,
+   6.51
+  ],
+  "urban_core_change_pct_p5_p50_p95": [
+   3.13,
+   12.56,
+   22.73
+  ],
+  "share_of_draws_with_basin_decline": 1.0
+ },
+ "ghsl_check": {
+  "blocks": 8278,
+  "spearman_rho_dperm_vs_dbuilt": -0.663,
+  "p": 0.0,
+  "mean_dperm_newly_built_blocks": -0.407,
+  "mean_dperm_other_blocks": -0.036,
+  "ghsl_built_fraction_land_mean": {
+   "1990": 0.0318,
+   "2020": 0.0672
+  },
+  "ghsl_built_fraction_core_mean": {
+   "1990": 0.0875,
+   "2020": 0.1711
+  },
+  "ndbi_high_but_not_built_km2_2024": 59.2
+ }
+}
