@@ -1,0 +1,1201 @@
+{
+ "grid": {
+  "cell_m": 150,
+  "rows": 185,
+  "cols": 442,
+  "active_cells": 34214,
+  "constant_head_cells": 1837,
+  "sealed_fraction_mean": {
+   "ghsl": {
+    "1990": 0.0318,
+    "2020": 0.0671
+   },
+   "spectral": {
+    "1990": 0.2857,
+    "2020": 0.4333
+   }
+  },
+  "rain_mean_mm_yr": {
+   "1986_1996": 1702.9,
+   "2019_2023": 1741.1
+  }
+ },
+ "scenarios": [
+  {
+   "sealing": "ghsl",
+   "k_m_day": 5.0,
+   "base_m": -30.0,
+   "c": 0.2,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 330.0,
+    "budget_m3_day": {
+     "RCH": 695449.0,
+     "CHD": -181724.4,
+     "DRN": -513724.6
+    },
+    "share_to_lagoon_and_sea": 0.261,
+    "share_to_surface_seepage": 0.739,
+    "head_mean_m": 3.505,
+    "head_max_m": 8.742,
+    "head_mean_core_m": 2.518,
+    "depth_to_water_median_m": 1.65,
+    "share_cells_seeping": 0.123,
+    "interface_depth_median_m_ghyben_herzberg": 135.6,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 325.6,
+    "budget_m3_day": {
+     "RCH": 686198.6,
+     "CHD": -179921.8,
+     "DRN": -506276.8
+    },
+    "share_to_lagoon_and_sea": 0.262,
+    "share_to_surface_seepage": 0.738,
+    "head_mean_m": 3.499,
+    "head_max_m": 8.849,
+    "head_mean_core_m": 2.474,
+    "depth_to_water_median_m": 1.67,
+    "share_cells_seeping": 0.12,
+    "interface_depth_median_m_ghyben_herzberg": 135.0,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.006,
+    "mean_core_m": -0.044,
+    "p5_m": -0.128
+   }
+  },
+  {
+   "sealing": "ghsl",
+   "k_m_day": 5.0,
+   "base_m": -30.0,
+   "c": 0.35,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 577.4,
+    "budget_m3_day": {
+     "RCH": 1217035.8,
+     "CHD": -240206.9,
+     "DRN": -976828.9
+    },
+    "share_to_lagoon_and_sea": 0.197,
+    "share_to_surface_seepage": 0.803,
+    "head_mean_m": 3.929,
+    "head_max_m": 10.872,
+    "head_mean_core_m": 2.814,
+    "depth_to_water_median_m": 1.22,
+    "share_cells_seeping": 0.185,
+    "interface_depth_median_m_ghyben_herzberg": 152.3,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 569.8,
+    "budget_m3_day": {
+     "RCH": 1200847.5,
+     "CHD": -237386.4,
+     "DRN": -963461.1
+    },
+    "share_to_lagoon_and_sea": 0.198,
+    "share_to_surface_seepage": 0.802,
+    "head_mean_m": 3.925,
+    "head_max_m": 10.932,
+    "head_mean_core_m": 2.775,
+    "depth_to_water_median_m": 1.24,
+    "share_cells_seeping": 0.181,
+    "interface_depth_median_m_ghyben_herzberg": 152.0,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.004,
+    "mean_core_m": -0.039,
+    "p5_m": -0.126
+   }
+  },
+  {
+   "sealing": "ghsl",
+   "k_m_day": 5.0,
+   "base_m": -60.0,
+   "c": 0.2,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 330.0,
+    "budget_m3_day": {
+     "RCH": 695449.0,
+     "CHD": -248460.7,
+     "DRN": -446988.3
+    },
+    "share_to_lagoon_and_sea": 0.357,
+    "share_to_surface_seepage": 0.643,
+    "head_mean_m": 2.987,
+    "head_max_m": 7.259,
+    "head_mean_core_m": 2.097,
+    "depth_to_water_median_m": 2.21,
+    "share_cells_seeping": 0.074,
+    "interface_depth_median_m_ghyben_herzberg": 115.5,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 325.6,
+    "budget_m3_day": {
+     "RCH": 686198.6,
+     "CHD": -245931.6,
+     "DRN": -440267.0
+    },
+    "share_to_lagoon_and_sea": 0.358,
+    "share_to_surface_seepage": 0.642,
+    "head_mean_m": 2.979,
+    "head_max_m": 7.307,
+    "head_mean_core_m": 2.047,
+    "depth_to_water_median_m": 2.24,
+    "share_cells_seeping": 0.072,
+    "interface_depth_median_m_ghyben_herzberg": 115.1,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.008,
+    "mean_core_m": -0.05,
+    "p5_m": -0.149
+   }
+  },
+  {
+   "sealing": "ghsl",
+   "k_m_day": 5.0,
+   "base_m": -60.0,
+   "c": 0.35,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 577.4,
+    "budget_m3_day": {
+     "RCH": 1217035.8,
+     "CHD": -337686.7,
+     "DRN": -879349.1
+    },
+    "share_to_lagoon_and_sea": 0.277,
+    "share_to_surface_seepage": 0.723,
+    "head_mean_m": 3.436,
+    "head_max_m": 8.541,
+    "head_mean_core_m": 2.461,
+    "depth_to_water_median_m": 1.72,
+    "share_cells_seeping": 0.116,
+    "interface_depth_median_m_ghyben_herzberg": 132.7,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 569.8,
+    "budget_m3_day": {
+     "RCH": 1200847.5,
+     "CHD": -334433.8,
+     "DRN": -866413.7
+    },
+    "share_to_lagoon_and_sea": 0.278,
+    "share_to_surface_seepage": 0.722,
+    "head_mean_m": 3.43,
+    "head_max_m": 8.651,
+    "head_mean_core_m": 2.414,
+    "depth_to_water_median_m": 1.74,
+    "share_cells_seeping": 0.113,
+    "interface_depth_median_m_ghyben_herzberg": 132.1,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.006,
+    "mean_core_m": -0.047,
+    "p5_m": -0.137
+   }
+  },
+  {
+   "sealing": "ghsl",
+   "k_m_day": 15.0,
+   "base_m": -30.0,
+   "c": 0.2,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 330.0,
+    "budget_m3_day": {
+     "RCH": 695449.0,
+     "CHD": -296249.5,
+     "DRN": -399199.5
+    },
+    "share_to_lagoon_and_sea": 0.426,
+    "share_to_surface_seepage": 0.574,
+    "head_mean_m": 2.636,
+    "head_max_m": 6.817,
+    "head_mean_core_m": 1.82,
+    "depth_to_water_median_m": 2.63,
+    "share_cells_seeping": 0.05,
+    "interface_depth_median_m_ghyben_herzberg": 102.5,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 325.6,
+    "budget_m3_day": {
+     "RCH": 686198.6,
+     "CHD": -293227.1,
+     "DRN": -392971.5
+    },
+    "share_to_lagoon_and_sea": 0.427,
+    "share_to_surface_seepage": 0.573,
+    "head_mean_m": 2.627,
+    "head_max_m": 6.872,
+    "head_mean_core_m": 1.773,
+    "depth_to_water_median_m": 2.65,
+    "share_cells_seeping": 0.048,
+    "interface_depth_median_m_ghyben_herzberg": 102.1,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.009,
+    "mean_core_m": -0.047,
+    "p5_m": -0.143
+   }
+  },
+  {
+   "sealing": "ghsl",
+   "k_m_day": 15.0,
+   "base_m": -30.0,
+   "c": 0.35,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 577.4,
+    "budget_m3_day": {
+     "RCH": 1217035.8,
+     "CHD": -407747.9,
+     "DRN": -809287.9
+    },
+    "share_to_lagoon_and_sea": 0.335,
+    "share_to_surface_seepage": 0.665,
+    "head_mean_m": 3.083,
+    "head_max_m": 7.297,
+    "head_mean_core_m": 2.182,
+    "depth_to_water_median_m": 2.11,
+    "share_cells_seeping": 0.08,
+    "interface_depth_median_m_ghyben_herzberg": 119.5,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 569.8,
+    "budget_m3_day": {
+     "RCH": 1200847.5,
+     "CHD": -403539.2,
+     "DRN": -797308.3
+    },
+    "share_to_lagoon_and_sea": 0.336,
+    "share_to_surface_seepage": 0.664,
+    "head_mean_m": 3.074,
+    "head_max_m": 7.346,
+    "head_mean_core_m": 2.13,
+    "depth_to_water_median_m": 2.13,
+    "share_cells_seeping": 0.078,
+    "interface_depth_median_m_ghyben_herzberg": 118.9,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.009,
+    "mean_core_m": -0.052,
+    "p5_m": -0.149
+   }
+  },
+  {
+   "sealing": "ghsl",
+   "k_m_day": 15.0,
+   "base_m": -60.0,
+   "c": 0.2,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 330.0,
+    "budget_m3_day": {
+     "RCH": 695449.0,
+     "CHD": -387219.2,
+     "DRN": -308229.8
+    },
+    "share_to_lagoon_and_sea": 0.557,
+    "share_to_surface_seepage": 0.443,
+    "head_mean_m": 2.101,
+    "head_max_m": 6.303,
+    "head_mean_core_m": 1.431,
+    "depth_to_water_median_m": 3.25,
+    "share_cells_seeping": 0.027,
+    "interface_depth_median_m_ghyben_herzberg": 80.0,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 325.6,
+    "budget_m3_day": {
+     "RCH": 686198.6,
+     "CHD": -383080.9,
+     "DRN": -303117.6
+    },
+    "share_to_lagoon_and_sea": 0.558,
+    "share_to_surface_seepage": 0.442,
+    "head_mean_m": 2.095,
+    "head_max_m": 6.367,
+    "head_mean_core_m": 1.387,
+    "depth_to_water_median_m": 3.26,
+    "share_cells_seeping": 0.027,
+    "interface_depth_median_m_ghyben_herzberg": 79.7,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.006,
+    "mean_core_m": -0.045,
+    "p5_m": -0.12
+   }
+  },
+  {
+   "sealing": "ghsl",
+   "k_m_day": 15.0,
+   "base_m": -60.0,
+   "c": 0.35,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 577.4,
+    "budget_m3_day": {
+     "RCH": 1217035.8,
+     "CHD": -546271.2,
+     "DRN": -670764.6
+    },
+    "share_to_lagoon_and_sea": 0.449,
+    "share_to_surface_seepage": 0.551,
+    "head_mean_m": 2.553,
+    "head_max_m": 6.784,
+    "head_mean_core_m": 1.753,
+    "depth_to_water_median_m": 2.73,
+    "share_cells_seeping": 0.046,
+    "interface_depth_median_m_ghyben_herzberg": 99.0,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 569.8,
+    "budget_m3_day": {
+     "RCH": 1200847.5,
+     "CHD": -540703.5,
+     "DRN": -660144.0
+    },
+    "share_to_lagoon_and_sea": 0.45,
+    "share_to_surface_seepage": 0.55,
+    "head_mean_m": 2.544,
+    "head_max_m": 6.84,
+    "head_mean_core_m": 1.706,
+    "depth_to_water_median_m": 2.75,
+    "share_cells_seeping": 0.045,
+    "interface_depth_median_m_ghyben_herzberg": 98.6,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.008,
+    "mean_core_m": -0.047,
+    "p5_m": -0.142
+   }
+  },
+  {
+   "sealing": "ghsl",
+   "k_m_day": 40.0,
+   "base_m": -30.0,
+   "c": 0.2,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 330.0,
+    "budget_m3_day": {
+     "RCH": 695449.0,
+     "CHD": -430697.1,
+     "DRN": -264751.9
+    },
+    "share_to_lagoon_and_sea": 0.619,
+    "share_to_surface_seepage": 0.381,
+    "head_mean_m": 1.863,
+    "head_max_m": 5.795,
+    "head_mean_core_m": 1.271,
+    "depth_to_water_median_m": 3.5,
+    "share_cells_seeping": 0.02,
+    "interface_depth_median_m_ghyben_herzberg": 69.3,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 325.6,
+    "budget_m3_day": {
+     "RCH": 686198.6,
+     "CHD": -425816.5,
+     "DRN": -260382.0
+    },
+    "share_to_lagoon_and_sea": 0.621,
+    "share_to_surface_seepage": 0.379,
+    "head_mean_m": 1.858,
+    "head_max_m": 5.906,
+    "head_mean_core_m": 1.225,
+    "depth_to_water_median_m": 3.51,
+    "share_cells_seeping": 0.019,
+    "interface_depth_median_m_ghyben_herzberg": 69.2,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.005,
+    "mean_core_m": -0.046,
+    "p5_m": -0.118
+   }
+  },
+  {
+   "sealing": "ghsl",
+   "k_m_day": 40.0,
+   "base_m": -30.0,
+   "c": 0.35,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 577.4,
+    "budget_m3_day": {
+     "RCH": 1217035.8,
+     "CHD": -612049.4,
+     "DRN": -604986.4
+    },
+    "share_to_lagoon_and_sea": 0.503,
+    "share_to_surface_seepage": 0.497,
+    "head_mean_m": 2.298,
+    "head_max_m": 6.475,
+    "head_mean_core_m": 1.574,
+    "depth_to_water_median_m": 3.03,
+    "share_cells_seeping": 0.035,
+    "interface_depth_median_m_ghyben_herzberg": 88.9,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 569.8,
+    "budget_m3_day": {
+     "RCH": 1200847.5,
+     "CHD": -606023.0,
+     "DRN": -594824.5
+    },
+    "share_to_lagoon_and_sea": 0.505,
+    "share_to_surface_seepage": 0.495,
+    "head_mean_m": 2.292,
+    "head_max_m": 6.524,
+    "head_mean_core_m": 1.529,
+    "depth_to_water_median_m": 3.04,
+    "share_cells_seeping": 0.033,
+    "interface_depth_median_m_ghyben_herzberg": 88.4,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.006,
+    "mean_core_m": -0.045,
+    "p5_m": -0.132
+   }
+  },
+  {
+   "sealing": "ghsl",
+   "k_m_day": 40.0,
+   "base_m": -60.0,
+   "c": 0.2,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 330.0,
+    "budget_m3_day": {
+     "RCH": 695449.0,
+     "CHD": -533823.6,
+     "DRN": -161625.5
+    },
+    "share_to_lagoon_and_sea": 0.768,
+    "share_to_surface_seepage": 0.232,
+    "head_mean_m": 1.35,
+    "head_max_m": 4.465,
+    "head_mean_core_m": 0.885,
+    "depth_to_water_median_m": 4.04,
+    "share_cells_seeping": 0.008,
+    "interface_depth_median_m_ghyben_herzberg": 47.5,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 325.6,
+    "budget_m3_day": {
+     "RCH": 686198.6,
+     "CHD": -525292.9,
+     "DRN": -160905.7
+    },
+    "share_to_lagoon_and_sea": 0.766,
+    "share_to_surface_seepage": 0.234,
+    "head_mean_m": 1.343,
+    "head_max_m": 4.596,
+    "head_mean_core_m": 0.835,
+    "depth_to_water_median_m": 4.06,
+    "share_cells_seeping": 0.008,
+    "interface_depth_median_m_ghyben_herzberg": 47.1,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.007,
+    "mean_core_m": -0.05,
+    "p5_m": -0.113
+   }
+  },
+  {
+   "sealing": "ghsl",
+   "k_m_day": 40.0,
+   "base_m": -60.0,
+   "c": 0.35,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 577.4,
+    "budget_m3_day": {
+     "RCH": 1217035.8,
+     "CHD": -788330.7,
+     "DRN": -428705.1
+    },
+    "share_to_lagoon_and_sea": 0.648,
+    "share_to_surface_seepage": 0.352,
+    "head_mean_m": 1.774,
+    "head_max_m": 5.669,
+    "head_mean_core_m": 1.204,
+    "depth_to_water_median_m": 3.6,
+    "share_cells_seeping": 0.017,
+    "interface_depth_median_m_ghyben_herzberg": 65.1,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 569.8,
+    "budget_m3_day": {
+     "RCH": 1200847.5,
+     "CHD": -778457.3,
+     "DRN": -422390.3
+    },
+    "share_to_lagoon_and_sea": 0.648,
+    "share_to_surface_seepage": 0.352,
+    "head_mean_m": 1.769,
+    "head_max_m": 5.793,
+    "head_mean_core_m": 1.155,
+    "depth_to_water_median_m": 3.61,
+    "share_cells_seeping": 0.016,
+    "interface_depth_median_m_ghyben_herzberg": 65.1,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.006,
+    "mean_core_m": -0.049,
+    "p5_m": -0.124
+   }
+  },
+  {
+   "sealing": "spectral",
+   "k_m_day": 5.0,
+   "base_m": -30.0,
+   "c": 0.2,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 243.6,
+    "budget_m3_day": {
+     "RCH": 513365.4,
+     "CHD": -152686.8,
+     "DRN": -360678.6
+    },
+    "share_to_lagoon_and_sea": 0.297,
+    "share_to_surface_seepage": 0.703,
+    "head_mean_m": 3.268,
+    "head_max_m": 7.824,
+    "head_mean_core_m": 2.299,
+    "depth_to_water_median_m": 1.93,
+    "share_cells_seeping": 0.094,
+    "interface_depth_median_m_ghyben_herzberg": 127.7,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 199.0,
+    "budget_m3_day": {
+     "RCH": 419390.5,
+     "CHD": -132577.4,
+     "DRN": -286813.2
+    },
+    "share_to_lagoon_and_sea": 0.316,
+    "share_to_surface_seepage": 0.684,
+    "head_mean_m": 3.073,
+    "head_max_m": 8.115,
+    "head_mean_core_m": 1.96,
+    "depth_to_water_median_m": 2.21,
+    "share_cells_seeping": 0.075,
+    "interface_depth_median_m_ghyben_herzberg": 116.7,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.195,
+    "mean_core_m": -0.339,
+    "p5_m": -1.119
+   }
+  },
+  {
+   "sealing": "spectral",
+   "k_m_day": 5.0,
+   "base_m": -30.0,
+   "c": 0.35,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 426.3,
+    "budget_m3_day": {
+     "RCH": 898389.5,
+     "CHD": -203856.4,
+     "DRN": -694533.0
+    },
+    "share_to_lagoon_and_sea": 0.227,
+    "share_to_surface_seepage": 0.773,
+    "head_mean_m": 3.706,
+    "head_max_m": 9.84,
+    "head_mean_core_m": 2.628,
+    "depth_to_water_median_m": 1.47,
+    "share_cells_seeping": 0.148,
+    "interface_depth_median_m_ghyben_herzberg": 144.8,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 348.2,
+    "budget_m3_day": {
+     "RCH": 733933.4,
+     "CHD": -176811.8,
+     "DRN": -557121.6
+    },
+    "share_to_lagoon_and_sea": 0.241,
+    "share_to_surface_seepage": 0.759,
+    "head_mean_m": 3.513,
+    "head_max_m": 10.461,
+    "head_mean_core_m": 2.296,
+    "depth_to_water_median_m": 1.74,
+    "share_cells_seeping": 0.117,
+    "interface_depth_median_m_ghyben_herzberg": 134.0,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.192,
+    "mean_core_m": -0.333,
+    "p5_m": -1.126
+   }
+  },
+  {
+   "sealing": "spectral",
+   "k_m_day": 5.0,
+   "base_m": -60.0,
+   "c": 0.2,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 243.6,
+    "budget_m3_day": {
+     "RCH": 513365.4,
+     "CHD": -208304.9,
+     "DRN": -305060.5
+    },
+    "share_to_lagoon_and_sea": 0.406,
+    "share_to_surface_seepage": 0.594,
+    "head_mean_m": 2.75,
+    "head_max_m": 6.904,
+    "head_mean_core_m": 1.878,
+    "depth_to_water_median_m": 2.51,
+    "share_cells_seeping": 0.057,
+    "interface_depth_median_m_ghyben_herzberg": 107.3,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 199.0,
+    "budget_m3_day": {
+     "RCH": 419390.5,
+     "CHD": -180202.7,
+     "DRN": -239187.8
+    },
+    "share_to_lagoon_and_sea": 0.43,
+    "share_to_surface_seepage": 0.57,
+    "head_mean_m": 2.559,
+    "head_max_m": 7.08,
+    "head_mean_core_m": 1.566,
+    "depth_to_water_median_m": 2.8,
+    "share_cells_seeping": 0.043,
+    "interface_depth_median_m_ghyben_herzberg": 97.7,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.191,
+    "mean_core_m": -0.312,
+    "p5_m": -0.976
+   }
+  },
+  {
+   "sealing": "spectral",
+   "k_m_day": 5.0,
+   "base_m": -60.0,
+   "c": 0.35,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 426.3,
+    "budget_m3_day": {
+     "RCH": 898389.5,
+     "CHD": -283591.3,
+     "DRN": -614798.2
+    },
+    "share_to_lagoon_and_sea": 0.316,
+    "share_to_surface_seepage": 0.684,
+    "head_mean_m": 3.196,
+    "head_max_m": 7.713,
+    "head_mean_core_m": 2.236,
+    "depth_to_water_median_m": 2.0,
+    "share_cells_seeping": 0.09,
+    "interface_depth_median_m_ghyben_herzberg": 124.8,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 348.2,
+    "budget_m3_day": {
+     "RCH": 733933.4,
+     "CHD": -246102.7,
+     "DRN": -487830.8
+    },
+    "share_to_lagoon_and_sea": 0.335,
+    "share_to_surface_seepage": 0.665,
+    "head_mean_m": 2.998,
+    "head_max_m": 7.897,
+    "head_mean_core_m": 1.895,
+    "depth_to_water_median_m": 2.3,
+    "share_cells_seeping": 0.07,
+    "interface_depth_median_m_ghyben_herzberg": 113.7,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.197,
+    "mean_core_m": -0.341,
+    "p5_m": -1.116
+   }
+  },
+  {
+   "sealing": "spectral",
+   "k_m_day": 15.0,
+   "base_m": -30.0,
+   "c": 0.2,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 243.6,
+    "budget_m3_day": {
+     "RCH": 513365.4,
+     "CHD": -246913.4,
+     "DRN": -266452.0
+    },
+    "share_to_lagoon_and_sea": 0.481,
+    "share_to_surface_seepage": 0.519,
+    "head_mean_m": 2.405,
+    "head_max_m": 6.49,
+    "head_mean_core_m": 1.625,
+    "depth_to_water_median_m": 2.9,
+    "share_cells_seeping": 0.038,
+    "interface_depth_median_m_ghyben_herzberg": 93.7,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 199.0,
+    "budget_m3_day": {
+     "RCH": 419390.5,
+     "CHD": -213436.7,
+     "DRN": -205953.8
+    },
+    "share_to_lagoon_and_sea": 0.509,
+    "share_to_surface_seepage": 0.491,
+    "head_mean_m": 2.228,
+    "head_max_m": 6.642,
+    "head_mean_core_m": 1.339,
+    "depth_to_water_median_m": 3.17,
+    "share_cells_seeping": 0.028,
+    "interface_depth_median_m_ghyben_herzberg": 85.5,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.177,
+    "mean_core_m": -0.287,
+    "p5_m": -0.82
+   }
+  },
+  {
+   "sealing": "spectral",
+   "k_m_day": 15.0,
+   "base_m": -30.0,
+   "c": 0.35,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 426.3,
+    "budget_m3_day": {
+     "RCH": 898389.5,
+     "CHD": -341727.5,
+     "DRN": -556661.9
+    },
+    "share_to_lagoon_and_sea": 0.38,
+    "share_to_surface_seepage": 0.62,
+    "head_mean_m": 2.845,
+    "head_max_m": 6.955,
+    "head_mean_core_m": 1.958,
+    "depth_to_water_median_m": 2.4,
+    "share_cells_seeping": 0.062,
+    "interface_depth_median_m_ghyben_herzberg": 111.4,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 348.2,
+    "budget_m3_day": {
+     "RCH": 733933.4,
+     "CHD": -295864.1,
+     "DRN": -438069.3
+    },
+    "share_to_lagoon_and_sea": 0.403,
+    "share_to_surface_seepage": 0.597,
+    "head_mean_m": 2.653,
+    "head_max_m": 7.126,
+    "head_mean_core_m": 1.642,
+    "depth_to_water_median_m": 2.69,
+    "share_cells_seeping": 0.048,
+    "interface_depth_median_m_ghyben_herzberg": 101.4,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.192,
+    "mean_core_m": -0.316,
+    "p5_m": -1.006
+   }
+  },
+  {
+   "sealing": "spectral",
+   "k_m_day": 15.0,
+   "base_m": -60.0,
+   "c": 0.2,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 243.6,
+    "budget_m3_day": {
+     "RCH": 513365.4,
+     "CHD": -321076.1,
+     "DRN": -192289.3
+    },
+    "share_to_lagoon_and_sea": 0.625,
+    "share_to_surface_seepage": 0.375,
+    "head_mean_m": 1.874,
+    "head_max_m": 5.715,
+    "head_mean_core_m": 1.262,
+    "depth_to_water_median_m": 3.49,
+    "share_cells_seeping": 0.02,
+    "interface_depth_median_m_ghyben_herzberg": 70.3,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 199.0,
+    "budget_m3_day": {
+     "RCH": 419390.5,
+     "CHD": -271994.9,
+     "DRN": -147395.6
+    },
+    "share_to_lagoon_and_sea": 0.649,
+    "share_to_surface_seepage": 0.351,
+    "head_mean_m": 1.698,
+    "head_max_m": 5.974,
+    "head_mean_core_m": 0.964,
+    "depth_to_water_median_m": 3.73,
+    "share_cells_seeping": 0.014,
+    "interface_depth_median_m_ghyben_herzberg": 62.8,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.176,
+    "mean_core_m": -0.298,
+    "p5_m": -0.758
+   }
+  },
+  {
+   "sealing": "spectral",
+   "k_m_day": 15.0,
+   "base_m": -60.0,
+   "c": 0.35,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 426.3,
+    "budget_m3_day": {
+     "RCH": 898389.5,
+     "CHD": -454516.1,
+     "DRN": -443873.4
+    },
+    "share_to_lagoon_and_sea": 0.506,
+    "share_to_surface_seepage": 0.494,
+    "head_mean_m": 2.318,
+    "head_max_m": 6.455,
+    "head_mean_core_m": 1.561,
+    "depth_to_water_median_m": 3.0,
+    "share_cells_seeping": 0.035,
+    "interface_depth_median_m_ghyben_herzberg": 89.7,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 348.2,
+    "budget_m3_day": {
+     "RCH": 733933.4,
+     "CHD": -392071.2,
+     "DRN": -341862.3
+    },
+    "share_to_lagoon_and_sea": 0.534,
+    "share_to_surface_seepage": 0.466,
+    "head_mean_m": 2.14,
+    "head_max_m": 6.607,
+    "head_mean_core_m": 1.274,
+    "depth_to_water_median_m": 3.27,
+    "share_cells_seeping": 0.026,
+    "interface_depth_median_m_ghyben_herzberg": 81.8,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.178,
+    "mean_core_m": -0.287,
+    "p5_m": -0.802
+   }
+  },
+  {
+   "sealing": "spectral",
+   "k_m_day": 40.0,
+   "base_m": -30.0,
+   "c": 0.2,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 243.6,
+    "budget_m3_day": {
+     "RCH": 513365.4,
+     "CHD": -353650.0,
+     "DRN": -159715.4
+    },
+    "share_to_lagoon_and_sea": 0.689,
+    "share_to_surface_seepage": 0.311,
+    "head_mean_m": 1.631,
+    "head_max_m": 4.99,
+    "head_mean_core_m": 1.089,
+    "depth_to_water_median_m": 3.75,
+    "share_cells_seeping": 0.013,
+    "interface_depth_median_m_ghyben_herzberg": 60.1,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 199.0,
+    "budget_m3_day": {
+     "RCH": 419390.5,
+     "CHD": -295677.7,
+     "DRN": -123712.8
+    },
+    "share_to_lagoon_and_sea": 0.705,
+    "share_to_surface_seepage": 0.295,
+    "head_mean_m": 1.466,
+    "head_max_m": 5.297,
+    "head_mean_core_m": 0.788,
+    "depth_to_water_median_m": 3.96,
+    "share_cells_seeping": 0.009,
+    "interface_depth_median_m_ghyben_herzberg": 52.3,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.165,
+    "mean_core_m": -0.301,
+    "p5_m": -0.72
+   }
+  },
+  {
+   "sealing": "spectral",
+   "k_m_day": 40.0,
+   "base_m": -30.0,
+   "c": 0.35,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 426.3,
+    "budget_m3_day": {
+     "RCH": 898389.5,
+     "CHD": -507844.3,
+     "DRN": -390545.2
+    },
+    "share_to_lagoon_and_sea": 0.565,
+    "share_to_surface_seepage": 0.435,
+    "head_mean_m": 2.066,
+    "head_max_m": 6.046,
+    "head_mean_core_m": 1.395,
+    "depth_to_water_median_m": 3.28,
+    "share_cells_seeping": 0.025,
+    "interface_depth_median_m_ghyben_herzberg": 79.1,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 348.2,
+    "budget_m3_day": {
+     "RCH": 733933.4,
+     "CHD": -435082.5,
+     "DRN": -298851.0
+    },
+    "share_to_lagoon_and_sea": 0.593,
+    "share_to_surface_seepage": 0.407,
+    "head_mean_m": 1.893,
+    "head_max_m": 6.262,
+    "head_mean_core_m": 1.107,
+    "depth_to_water_median_m": 3.53,
+    "share_cells_seeping": 0.018,
+    "interface_depth_median_m_ghyben_herzberg": 71.7,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.173,
+    "mean_core_m": -0.288,
+    "p5_m": -0.764
+   }
+  },
+  {
+   "sealing": "spectral",
+   "k_m_day": 40.0,
+   "base_m": -60.0,
+   "c": 0.2,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 243.6,
+    "budget_m3_day": {
+     "RCH": 513365.4,
+     "CHD": -428636.0,
+     "DRN": -84729.4
+    },
+    "share_to_lagoon_and_sea": 0.835,
+    "share_to_surface_seepage": 0.165,
+    "head_mean_m": 1.135,
+    "head_max_m": 3.628,
+    "head_mean_core_m": 0.71,
+    "depth_to_water_median_m": 4.28,
+    "share_cells_seeping": 0.005,
+    "interface_depth_median_m_ghyben_herzberg": 40.1,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 199.0,
+    "budget_m3_day": {
+     "RCH": 419390.5,
+     "CHD": -349078.0,
+     "DRN": -70312.6
+    },
+    "share_to_lagoon_and_sea": 0.832,
+    "share_to_surface_seepage": 0.168,
+    "head_mean_m": 1.008,
+    "head_max_m": 3.914,
+    "head_mean_core_m": 0.44,
+    "depth_to_water_median_m": 4.43,
+    "share_cells_seeping": 0.003,
+    "interface_depth_median_m_ghyben_herzberg": 30.9,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.127,
+    "mean_core_m": -0.271,
+    "p5_m": -0.578
+   }
+  },
+  {
+   "sealing": "spectral",
+   "k_m_day": 40.0,
+   "base_m": -60.0,
+   "c": 0.35,
+   "1990": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 426.3,
+    "budget_m3_day": {
+     "RCH": 898389.5,
+     "CHD": -644011.1,
+     "DRN": -254378.4
+    },
+    "share_to_lagoon_and_sea": 0.717,
+    "share_to_surface_seepage": 0.283,
+    "head_mean_m": 1.539,
+    "head_max_m": 4.821,
+    "head_mean_core_m": 1.021,
+    "depth_to_water_median_m": 3.85,
+    "share_cells_seeping": 0.012,
+    "interface_depth_median_m_ghyben_herzberg": 56.2,
+    "active_km2": 769.8
+   },
+   "2020": {
+    "converged": true,
+    "percent_discrepancy": -0.0,
+    "recharge_mean_mm_yr": 348.2,
+    "budget_m3_day": {
+     "RCH": 733933.4,
+     "CHD": -535552.3,
+     "DRN": -198381.2
+    },
+    "share_to_lagoon_and_sea": 0.73,
+    "share_to_surface_seepage": 0.27,
+    "head_mean_m": 1.378,
+    "head_max_m": 5.133,
+    "head_mean_core_m": 0.713,
+    "depth_to_water_median_m": 4.05,
+    "share_cells_seeping": 0.007,
+    "interface_depth_median_m_ghyben_herzberg": 48.0,
+    "active_km2": 769.8
+   },
+   "head_change_2020_minus_1990": {
+    "mean_m": -0.162,
+    "mean_core_m": -0.308,
+    "p5_m": -0.726
+   }
+  }
+ ]
+}
