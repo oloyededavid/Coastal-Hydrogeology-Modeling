@@ -21,3 +21,11 @@ Working branch: `research-audit` (local only; nothing is pushed). Original files
   processing baseline >= 04.00 removed explicitly. Run started.
 - Report PDF (documents/) still states an 18.1% basin reduction and >45% in the urban core, and mentions specific
   yield; the notebook output is 5.16% and 18.14% and no specific yield is used. Confirmed by text extraction.
+- p01 completed (14 S2, 29 L5 scenes). p02: reproduction 3.91 % / 12.18 % vs notebook 5.16 % / 18.14 %; per-epoch
+  rainfall removes the basin decline; core decline 3.1-22.7 % over 2,000 weight sets; GHSL rho -0.66; 59 km2 NDBI
+  "built" sand. The notebook's eastern "rural" reference zone gained buildings (GHSL 0.6 % -> 1.5 %).
+- p03: first run 5 of 12 scenarios failed (drain conductance K*A/1 m too stiff); with K*A/10 m and starting heads
+  0.5 m below ground all 48 runs (12 parameter sets x 2 sealing estimates x 2 epochs) converge, budget 0.00 %.
+  Core water-table change 1990->2020: -4 to -5 cm (GHSL sealing), -27 to -34 cm (satellite upper bound).
+- p04 figures, p05 page data, docs/index.html preview (axe clean, no overflow 320-1440, all numbers filled).
+- README rewritten; AUDIT_AND_REPAIR.md written (audit, corrections, tests, limits, research potential, before/after).
