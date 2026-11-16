@@ -127,4 +127,4 @@ Scientific, fact-check, code, interface, requirements and editorial reviews (rea
 - **Missing limits** (urban return flows, abstraction, lagoon level, low land as water) added. Terminology made consistent (western barrier, high scenario, surface openness); undefined terms and missing references (Sentinel-2, NDVI, Planetary Computer, the earlier report) added.
 - **Page:** phone versions of every figure (the text was unreadable on phones), WebP images (4.6 MB to about 1.3 MB), draft label shown on phones.
 
-Not changed, with reason: the shared stylesheet issues the interface review found on all study sites (footer alignment, 23 px link targets) are left for a change across all sites; p01's slope near no-data cells was not recomputed (it needs a full input rebuild; no-data lies in water, outside the model's land cells, but this was not measured).
+Not changed, with reason: the shared stylesheet issues the interface review found on all study sites (footer alignment, 23 px link targets) are left for a change across all sites; p01's slope near no-data cells was not recomputed (it needs a full input rebuild; its effect was not measured).
