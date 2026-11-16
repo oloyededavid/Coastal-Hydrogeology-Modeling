@@ -1,144 +1,432 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Urban sealing and groundwater on the Lekki–Epe barrier, Lagos</title>
-<meta name="description" content="A re-analysis of satellite evidence for surface sealing on the Lekki–Epe barrier, Lagos, 1986–2024, with an uncalibrated MODFLOW 6 scenario model of the water table.">
-<style>
-@font-face { font-family: 'Range Dash'; src: url(assets/fonts/range-dash.woff) format('woff'); unicode-range: U+2013; font-weight: 100 599; }
-@font-face { font-family: 'Range Dash'; src: url(assets/fonts/range-dash-bold.woff) format('woff'); unicode-range: U+2013; font-weight: 600 900; }
-:root { --ink: #141412; --ink-2: #4a4944; --ink-3: #6a6963; --rule: #e4e4e0; --line: #cfcfca; --paper-2: #f6f6f4; --accent: #1f5fae;
-        --sans: 'Range Dash', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; --serif: Georgia, 'Iowan Old Style', serif; }
-* { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: 72px; }
-body { margin: 0; background: #fff; color: var(--ink); font: 400 17px/1.65 var(--sans); }
-a { color: var(--accent); text-underline-offset: 3px; }
-a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
-.skipnav a { position: absolute; left: -999px; top: 8px; background: #fff; padding: 8px 12px; border: 1px solid var(--line); z-index: 10; }
-.skipnav a:focus { left: 12px; }
-header.top { position: sticky; top: 0; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--rule); z-index: 5; }
-.top-in { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; gap: 24px; min-height: 56px; flex-wrap: wrap; }
-.top-in b { font-weight: 600; font-size: 15px; }
-.top nav { display: flex; gap: 4px; overflow-x: auto; margin-left: auto; }
-.top nav a { color: var(--ink-3); text-decoration: none; font-size: 14px; padding: 6px 10px; white-space: nowrap; border-radius: 6px; }
-.top nav a:hover { color: var(--ink); background: var(--paper-2); }
-main { max-width: 760px; margin: 0 auto; padding: 40px 20px 64px; }
-.wide { max-width: 1060px; margin-left: 50%; transform: translateX(-50%); width: calc(100vw - 40px); }
-h1 { font: 500 clamp(30px, 4.6vw, 44px)/1.12 var(--serif); letter-spacing: -.01em; margin: 0 0 14px; }
-h2 { font: 500 26px/1.2 var(--serif); margin: 52px 0 12px; padding-top: 20px; border-top: 1px solid var(--rule); }
-h3 { font-size: 17px; font-weight: 600; margin: 28px 0 6px; }
-p { margin: 0 0 14px; }
-.lede { font-size: 19px; color: var(--ink-2); }
-.meta { font-size: 14px; color: var(--ink-3); margin: 0 0 22px; }
-.note { border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; font-size: 15px; color: var(--ink-2); margin: 22px 0; }
-.note b { color: var(--ink); }
-figure { margin: 26px 0; }
-figure img { width: 100%; height: auto; display: block; border: 1px solid var(--rule); border-radius: 6px; background: #fff; }
-figcaption { font-size: 14px; color: var(--ink-2); margin-top: 8px; }
-figcaption b { color: var(--ink); }
-.tw { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; margin: 18px 0; }
-table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
-th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--rule); }
-th { font-weight: 600; background: var(--paper-2); }
-tr:last-child td { border-bottom: 0; }
-td.n { white-space: nowrap; font-variant-numeric: tabular-nums; }
-ol, ul { padding-left: 22px; margin: 0 0 14px; } li { margin: 4px 0; }
-.num { font-variant-numeric: tabular-nums; }
-footer { border-top: 1px solid var(--rule); color: var(--ink-3); font-size: 14px; }
-footer div { max-width: 1100px; margin: 0 auto; padding: 22px 20px 40px; }
-@media (max-width: 640px) { body { font-size: 16px; } .top nav { margin-left: -10px; flex: 1 0 100%; padding-bottom: 6px; } .wide { width: calc(100vw - 32px); } main { padding: 28px 16px 48px; } }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="only light">
+    <title>Urban sealing and the shallow water table of the Lekki–Epe
+barrier, Lagos, 1986–2024</title>
+<link rel="canonical" href="https://oloyededavid.github.io/Coastal-Hydrogeology-Modeling/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Urban sealing and the shallow water
+table of the Lekki–Epe barrier, Lagos, 1986–2024">
+<meta property="og:description" content="Urban sealing on the Lekki-Epe
+barrier, Lagos, 1986-2024, from open satellite data, and an uncalibrated
+MODFLOW 6 scenario model of what it could do to the shallow water
+table.">
+<meta property="og:url" content="https://oloyededavid.github.io/Coastal-Hydrogeology-Modeling/">
+<meta property="og:image" content="https://oloyededavid.github.io/Coastal-Hydrogeology-Modeling/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+    <meta name="description" content="Urban sealing on the Lekki-Epe
+barrier, Lagos, 1986-2024, from open satellite data, and an uncalibrated
+MODFLOW 6 scenario model of what it could do to the shallow water
+table.">
+    <meta name="author" content="David Oloyede">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%231f56b0'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&amp;display=swap">
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=zodiak@500,700&amp;display=swap">
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<nav class="skipnav" aria-label="Skip link"><a href="#main">Skip to the content</a></nav>
-<header class="top"><div class="top-in"><b>Lekki–Epe groundwater</b>
-  <nav aria-label="Sections"><a href="#question">Question</a><a href="#data">Data</a><a href="#sealing">Sealing</a><a href="#model">Model</a><a href="#changed">What changed</a><a href="#limits">Limits</a><a href="#next">Next</a></nav>
-</div></header>
-<main id="main">
-  <h1>Urban sealing and groundwater on the Lekki–Epe barrier, Lagos</h1>
-  <p class="meta">David Oloyede · re-analysis November 2026 · preview, not published</p>
-  <p class="lede">Satellite images show the western Lekki–Epe barrier sealing over between the late 1980s and 2024. This page asks how much that could matter for the shallow groundwater beneath it, using only open data and a groundwater model run as scenarios.</p>
-  <div class="note"><b>Status.</b> This re-analysis replaces the earlier version of the project. Its satellite index is reproduced and tested, and the groundwater model now runs. The model is <b>not calibrated</b>: no water-level, abstraction, aquifer-test or salinity data were available, so its heads are illustrative and its results are differences between scenarios, not predictions.</div>
+<!-- study-bar:start --><style>
+.sn-bar{font:400 14px/1.4 'Range Dash','Satoshi',system-ui,-apple-system,'Segoe UI',sans-serif;background:#fff;border-bottom:1px solid #e5e5e1;color:#141412;position:relative;z-index:1000}
+.sn-bar .sn-in{max-width:1240px;margin:0 auto;padding:4px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.sn-bar a{color:#141412;text-decoration:none;display:inline-flex;align-items:center;min-height:32px}.sn-bar a:hover{text-decoration:underline;text-underline-offset:4px}
+.sn-home{font-weight:700}.sn-pos{color:#6a6963;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.sn-pn{display:flex;gap:18px}.sn-pn a{color:#55544e}
+.sn-next{font:400 16px/1.5 'Range Dash','Satoshi',system-ui,-apple-system,'Segoe UI',sans-serif;color:#141412;background:#fff;border-top:1px solid #ececea;margin-top:64px}
+.sn-next .sn-in{max-width:1080px;margin:0 auto;padding:40px 24px 48px}
+.sn-k{font-size:15px;color:#6a6963;margin:0 0 14px}
+.sn-card{display:flex;align-items:center;gap:20px;text-decoration:none;color:inherit;background:#fafafa;border:1px solid #ececea;border-radius:22px;padding:14px 18px 14px 14px;transition:border-color .25s,background .25s}
+.sn-card:hover{border-color:#d5d5d1;background:#f6f6f5}
+.sn-media{flex:none;width:112px;height:84px;border-radius:14px;overflow:hidden;background:#eee}
+.sn-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.sn-card:hover .sn-media img{transform:scale(1.05)}
+.sn-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.sn-t b{font-weight:500;font-size:clamp(17px,1.8vw,21px);line-height:1.25;letter-spacing:-.005em}
+.sn-t span{font-size:15px;color:#62625d}
+.sn-arrow{flex:none;width:46px;height:46px;border-radius:50%;border:1px solid #e4e4e0;background:#fff;display:grid;place-items:center;font-size:20px;color:#3a3a37;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.sn-card:hover .sn-arrow{transform:translateX(3px)}
+.sn-back{display:flex;justify-content:center;gap:10px;margin-top:28px;font-size:15px;color:#62625d;text-decoration:none}
+.sn-back:hover{color:#141412}
+@media (max-width:620px){.sn-media{width:72px;height:72px}.sn-t span{display:none}.sn-pos{display:none}}
+@media (prefers-reduced-motion:reduce){.sn-media img,.sn-arrow{transition:none}}
+</style><nav class="sn-bar" aria-label="Portfolio"><div class="sn-in"><a class="sn-home" href="https://oloyededavid.github.io/geospatial-rs-portfolio/">← David Oloyede</a><span class="sn-pos">Draft · not yet on the portfolio</span><span class="sn-pn"><a href="https://oloyededavid.github.io/Lagos-Urban-Heat-Analytics/" title="Urban heat island and distance to vegetation in Lagos State, Nigeria, 2020–2024">Previous</a><a href="https://oloyededavid.github.io/Observational-Hydrology-Extremes/" title="Hydrological extremes where the gauges are missing: floods, droughts and design rainfall in Nigeria, 1950–2070">Next study →</a></span></div></nav><!-- study-bar:end -->
+<nav class="skipnav" aria-label="Skip link"><a class="skip" href="#abstract">Skip to the abstract</a></nav>
+<header class="site-header">
+    <div class="site-inner">
+        <a class="site-id" href="#top">Lekki–Epe groundwater</a>
+        <nav class="toc" aria-label="Sections">
+            <a href="#abstract">Abstract</a>
+            <a href="#data-and-methods">Methods</a>
+            <a href="#results">Results</a>
+            <a href="#discussion">Discussion</a>
+            <a href="#references">References</a>
+        </nav>
+    </div>
+    <nav class="toc-phone" aria-label="Sections on phone">
+        <a href="#abstract">Abstract</a>
+        <a href="#data-and-methods">Methods</a>
+        <a href="#results">Results</a>
+        <a href="#discussion">Discussion</a>
+        <a href="#references">References</a>
+    </nav>
+    <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+</header>
 
-  <h2 id="question">Question and setting</h2>
-  <p>The barrier between the Lagos and Lekki lagoons and the Atlantic is a strip of coastal sand about <span class="num" data-v="landKm2">—</span> km² in the study grid. Rain falling on open sand soaks in and recharges a shallow water table; rain falling on roofs and roads mostly runs off. Two questions follow:</p>
-  <ol><li>How much has the land surface sealed over since the late 1980s, and how reliable is the satellite evidence?</li>
-      <li>What could that sealing do to the water table, given what is and is not known about the aquifer?</li></ol>
-  <figure class="wide"><img src="fig/study_area.png" width="1580" height="740" alt="Map of the Lekki–Epe barrier between the Lagos Lagoon, the Lekki Lagoon and the Atlantic Ocean, shaded by surface elevation, with the western 45 percent of the grid marked as the urban core." loading="lazy">
-    <figcaption><b>Figure 1.</b> Study area (UTM zone 31N, km). The western 45 % of the grid, about <span class="num" data-v="coreKm2">—</span> km² of land, is what the original notebook called the urban core; it is kept here so results can be compared.</figcaption></figure>
+<main class="article" id="top">
+<header class="title">
+    <h1>Urban sealing and the shallow water table of the Lekki–Epe
+barrier, Lagos, 1986–2024</h1>
+    <p class="sig"><span>David Oloyede</span><span>November
+2026</span></p>
+</header>
 
-  <h2 id="data">Data and method</h2>
-  <div class="tw"><table>
-    <thead><tr><th>Input</th><th>Use</th></tr></thead>
-    <tbody>
-      <tr><td>Landsat-5 TM, 1986–1996, November–March (<span data-v="l5Scenes">—</span> scenes)</td><td>Earlier land surface: built-up (NDBI) and vegetation (NDVI) indices</td></tr>
-      <tr><td>Sentinel-2 L2A, November 2023–March 2024 (<span data-v="s2Scenes">—</span> scenes)</td><td>Later land surface, same indices</td></tr>
-      <tr><td>Copernicus DEM GLO-30</td><td>Slope and surface shape; model top. It is a surface model that includes buildings and trees</td></tr>
-      <tr><td>CHIRPS v2.0 rainfall, 1986–1996 and 2019–2023</td><td>Rainfall of each epoch</td></tr>
-      <tr><td>GHSL built-up surface R2023A, 1990 and 2020</td><td>An independent record of built area, used to check the satellite signal and as one estimate of sealing</td></tr>
-      <tr><td>MODFLOW 6.6.3 with FloPy</td><td>Steady-state groundwater model, one unconfined layer, 150 m cells</td></tr>
-    </tbody></table></div>
-  <p>All inputs were rebuilt from Microsoft Planetary Computer and the data providers, because the Earth Engine export the original notebook read was never stored. The scripts are in <code>code/pipeline/</code> and run in order.</p>
+<h2 id="abstract">Abstract</h2>
+<p>We ask how much the land surface of the Lekki–Epe barrier in Lagos
+has sealed over since the late 1980s, how reliable the satellite
+evidence for that is, and what the sealing could do to the shallow water
+table beneath it. We rebuild, from open data, a recharge-potential index
+that an earlier version of this study computed from Landsat-5
+(1986–1996) and Sentinel-2 (2023–2024) imagery, test how its change
+depends on each choice in its construction, compare it with the GHSL
+built-up record, and run a steady-state MODFLOW 6 model of the barrier
+as a set of scenarios. The index falls by 3.9 % over the barrier and
+12.2 % in its western part; the decline in the west appears in every
+single change to the method we tested and in 91 % of 2,000 random
+weightings, but its size ranges widely and the barrier-wide change
+reverses sign when each epoch is given its own rainfall. The index falls
+where GHSL maps new buildings (Spearman ρ −0.66). In the model,
+groundwater flows from the middle of the barrier to the lagoons and the
+sea, and most recharge leaves through seepage at the surface, which
+holds the water table near the ground. From 1990 to 2020 the mean water
+table in the western barrier falls by 4–5 cm with sealing taken from
+GHSL buildings and by 27–34 cm in a high scenario taken from the
+satellite index. No groundwater observations were available, so the
+model is not calibrated; its results are differences between
+scenarios.</p>
+<p><strong>Keywords:</strong> urban sealing; groundwater recharge;
+coastal aquifer; MODFLOW 6; Landsat; Sentinel-2; GHSL; Lagos</p>
+<h2 id="introduction">1. Introduction</h2>
+<p>Rain that falls on open sand soaks in and recharges a shallow water
+table; rain that falls on roofs and roads mostly runs off. Where a city
+spreads over a sandy coastal barrier, sealing the surface could
+therefore lower the water table, and with it the freshwater held above
+the sea. Testing this needs three things: a record of how much the
+surface has sealed, an estimate of how much rain reaches the water
+table, and a description of how the aquifer moves water to the sea. In
+Lagos the first can come from satellites, the second only partly, and
+the third not at all from open data.</p>
+<p>An earlier version of this study combined five layers into a
+recharge-potential index with fixed weights, reported an 18.1 % loss of
+recharge across the barrier and more than 45 % in its urban core, and
+wrote, but did not run, a MODFLOW 6 model. An audit found that the
+notebook itself had printed 5.2 % and 18.1 %, that these were changes in
+an index, not in recharge, that the model files could not have run
+meaningfully (recharge in millimetres per year in a model set in metres
+and days, no boundary conditions, no hydraulic conductivity) and that
+the satellite export the notebook read had never been stored.</p>
+<p>We ask three questions. How much has the surface sealed, and how
+robust is the satellite evidence? Does it agree with an independent
+built-up record? And, under the range of aquifer properties and sealing
+estimates that cannot be ruled out, how much could the sealing move the
+water table?</p>
+<h2 id="data-and-methods">2. Data and methods</h2>
+<h3 id="study-area">2.1 Study area</h3>
+<p>The study area is the land of the Lekki–Epe barrier between the Lagos
+and Lekki lagoons and the Atlantic Ocean, inside the box 3.45–4.05° E,
+6.40–6.65° N, on a 30 m grid in WGS 84 / UTM zone 31N: 769 km² of land.
+Following the earlier study, the western 45 % of the grid (222 km² of
+land) is called the western barrier or “urban core” in comparisons; it
+is a column cut, not a mapped urban boundary.</p>
+<figure class="wide" id="fig-1">
+<img src="assets/figures/study_area.png" width="1577" height="737" loading="lazy" alt="The Lekki–Epe barrier between the Lagos Lagoon, the Lekki Lagoon and the Atlantic (UTM zone 31N, km), shaded by the Copernicus surface model. The western 45 % of the grid, shaded orange, is the &quot;urban core&quot; of the comparisons.">
+<figcaption>
+<b>Figure 1.</b> The Lekki–Epe barrier between the Lagos Lagoon, the
+Lekki Lagoon and the Atlantic (UTM zone 31N, km), shaded by the
+Copernicus surface model. The western 45 % of the grid, shaded orange,
+is the “urban core” of the comparisons.
+</figcaption>
+</figure>
+<h3 id="data">2.2 Data</h3>
+<p>Every input is read from open sources and rebuilt by a script
+(Section 6). <strong>Imagery:</strong> Landsat-5 TM Collection 2 Level 2
+surface reflectance (U.S. Geological Survey, 2020), November–March
+1986–1996, 29 scenes with clear pixels, cloud and shadow masked and
+combined as a per-band median; Sentinel-2 Level-2A, November 2023–March
+2024, 14 scenes, scene classification classes 4–7 kept. Both were read
+from Microsoft Planetary Computer. From them we compute the normalised
+difference built-up index (NDBI; Zha et al., 2003), the vegetation index
+(NDVI) and the modified normalised difference water index (Xu, 2006).
+<strong>Elevation:</strong> Copernicus DEM GLO-30 (European Space
+Agency, 2022), a digital surface model that includes buildings and
+trees. <strong>Rainfall:</strong> CHIRPS v2.0 (Funk et al., 2015), mean
+annual totals for 1986–1996 (1,703 mm on the barrier) and 2019–2023
+(1,741 mm). <strong>Built-up area:</strong> GHSL GHS-BUILT-S R2023A
+(Pesaresi, 2023), the built-up surface fraction of each 3-arc-second
+cell in 1990 and 2020. GHSL uses a different algorithm from this study
+but partly the same Landsat archive, so agreement with it is a
+cross-check, not independent validation.</p>
+<h3 id="recharge-potential-index">2.3 Recharge-potential index</h3>
+<p>The index is the earlier study’s weighted sum of five layers, each
+scaled to 0–1 between its 2nd and 98th percentiles: permeability (1 −
+NDBI; weight 0.30), slope (0.25), a surface-curvature term (0.20),
+rainfall (0.15) and vegetation (0.10). The curvature term is a smoothed
+negative Laplacian of the surface model; the earlier study called it a
+topographic wetness index, which it is not (Beven &amp; Kirkby, 1979).
+To match the two sensors, the earlier study shifted the Landsat indices
+so that the eastern 30 % of the grid, assumed unchanged, showed no
+change. We reproduce this method line by line on the rebuilt inputs and
+then change one choice at a time: the rainfall of each epoch instead of
+2019–2023 for both; a sensor shift taken from cells GHSL maps as never
+built; no shift; the curvature term removed; and 2,000 random weight
+sets drawn from a flat Dirichlet distribution, applied to the method
+with both corrections.</p>
+<h3 id="groundwater-model">2.4 Groundwater model</h3>
+<p>We model the barrier as one unconfined sand layer with MODFLOW 6
+(Langevin et al., 2017) built with FloPy (Bakker et al., 2016), steady
+state, on 150 m cells. Water cells next to the land are held at 0 m (the
+lagoons and the sea at mean sea level; tides and lagoon set-up are
+ignored); cells off the barrier are inactive. The top is the 10th
+percentile of the 30 m surface model in each cell, which reduces but
+does not remove the effect of buildings and trees. A drain at the top of
+every land cell lets water seep out where the water table reaches the
+ground. Recharge is c × P × (1 − s), with P the CHIRPS rainfall of the
+epoch, s the sealed fraction and c the share of rain on unsealed ground
+that reaches the water table.</p>
+<p>The aquifer’s properties are not known to this study, so they are
+scenarios: hydraulic conductivity 5, 15 or 40 m per day, a flat base at
+−30 or −60 m, and c of 0.20 or 0.35. The sealed fraction is taken two
+ways: from GHSL buildings, which miss roads and paving and are likely
+too low, and from the index’s own permeability term taken at face value,
+a high scenario that is not a measured fraction and not a strict bound
+(in 36 % of model cells its 1990–2020 change is smaller than GHSL’s).
+Each of the 48 runs (12 parameter sets, 2 sealing estimates, 2 epochs)
+uses today’s terrain and today’s land and water masks, so the comparison
+is today’s barrier with 1990 sealing against today’s barrier with 2020
+sealing. A second set of runs varies what the scenarios hold fixed: the
+drain conductance (connection length 1, 10 and 100 m), the drain
+elevation (at the top, 0.5 m and 1.0 m below it) and how the top is
+taken from the surface model (2nd, 10th and 50th percentile).</p>
+<p>The solver settings were checked against the Dupuit–Forchheimer
+solution for a strip of aquifer between two water bodies with uniform
+recharge (Bear, 1972): the largest head difference was 0.009 m. That
+test has no seepage drains, so it checks the solver, not the seepage
+set-up.</p>
+<h3 id="what-the-model-can-and-cannot-say">2.5 What the model can and
+cannot say</h3>
+<p>No water levels, abstraction records, aquifer tests or salinity
+measurements were available, so the model cannot be calibrated or
+validated, and absolute heads are illustrative. Its results are the
+differences between scenarios. It has no variable-density flow and says
+nothing about the depth of salt water.</p>
+<h2 id="results">3. Results</h2>
+<h3 id="the-satellite-evidence-for-sealing">3.1 The satellite evidence
+for sealing</h3>
+<p>Rebuilt with the earlier method, the index falls from a mean of 0.57
+to 0.54: by 3.9 % over the barrier and 12.2 % in the western barrier,
+against 5.2 % and 18.1 % in the earlier notebook. The absolute level
+differs from the notebook’s (0.43) because the inputs differ; since the
+terrain terms are identical in both epochs and sit in the denominator,
+the percentages partly reflect the index’s constant terms, not change.
+About 81 % of the change in the mean comes from the permeability
+term.</p>
+<figure class="wide" id="fig-2">
+<img src="assets/figures/index_maps.png" width="1661" height="2063" loading="lazy" alt="The recharge-potential index from 1986–1996 imagery (top) and 2023–2024 imagery (middle), and their difference (bottom; red is a decline). The dashed line marks the eastern 30 % of the grid that the earlier study used as an unchanged reference.">
+<figcaption>
+<b>Figure 2.</b> The recharge-potential index from 1986–1996 imagery
+(top) and 2023–2024 imagery (middle), and their difference (bottom; red
+is a decline). The dashed line marks the eastern 30 % of the grid that
+the earlier study used as an unchanged reference.
+</figcaption>
+</figure>
+<p>The largest single decline lies in the south-east, inside the zone
+the earlier study assumed unchanged; GHSL’s built-up fraction there rose
+from 0.6 % to 1.5 %. The reference was not stable.</p>
+<h3 id="how-robust-the-change-is">3.2 How robust the change is</h3>
+<p>Giving each epoch its own rainfall turns the barrier-wide decline
+into a rise of 0.4 %, because 1986–1996 was drier, and leaves a decline
+of 9.3 % in the west. Taking the sensor shift from never-built ground
+gives 9.9 % and 17.7 %; no shift gives 6.7 % and 14.7 %; removing the
+curvature term gives 4.7 % and 15.1 %. With both corrections, the
+declines are 6.1 % and 15.2 %. Across 2,000 random weight sets with both
+corrections, the western barrier declines in 91 % of sets and the whole
+barrier in 75 %; the western change runs from −4.2 % to 30.5 % (5th–95th
+percentile; negative values are rises).</p>
+<figure class="wide" id="fig-3">
+<img src="assets/figures/index_sensitivity.png" width="1794" height="866" loading="lazy" alt="Decline in the mean index under each change to the method, for the whole barrier (blue) and the western barrier (orange), and the 5th–95th percentile of 2,000 random weight sets under the earlier set-up and with both corrections.">
+<figcaption>
+<b>Figure 3.</b> Decline in the mean index under each change to the
+method, for the whole barrier (blue) and the western barrier (orange),
+and the 5th–95th percentile of 2,000 random weight sets under the
+earlier set-up and with both corrections.
+</figcaption>
+</figure>
+<p>The direction of the change in the west is consistent; its size is
+not, and the barrier-wide direction depends on the rainfall used.</p>
+<h3 id="comparison-with-ghsl">3.3 Comparison with GHSL</h3>
+<p>Over 8,278 blocks of 300 m, the change in the index falls as the gain
+in GHSL built-up fraction rises (Spearman ρ −0.66; Figure 4). GHSL’s
+built-up share of the western barrier rose from 9 % in 1990 to 17 % in
+2020. The built-up index also reads bright bare ground as built: 59 km²
+scores as built-up in 2024 where GHSL maps no buildings, which includes
+bare sand, cleared land, roads and paving.</p>
+<figure class="wide" id="fig-4">
+<img src="assets/figures/ghsl_check.png" width="1117" height="709" loading="lazy" alt="Change in the index against the gain in GHSL built-up fraction, 1990–2020, on 300 m blocks.">
+<figcaption>
+<b>Figure 4.</b> Change in the index against the gain in GHSL built-up
+fraction, 1990–2020, on 300 m blocks.
+</figcaption>
+</figure>
+<h3 id="the-water-table">3.4 The water table</h3>
+<p>All 48 scenario runs converged, with a water-budget discrepancy below
+0.01 % of inflow. In every scenario groundwater flows from the middle of
+the barrier to the lagoons and the sea, across the barrier rather than
+along it (Figure 5). The water table lies 1.2–4.4 m below the top
+(medians across scenarios), and 16–80 % of recharge seeps out at the
+surface; the rest reaches the lagoons and the sea.</p>
+<figure class="wide" id="fig-5">
+<img src="assets/figures/heads.png" width="1827" height="1503" loading="lazy" alt="Top: the modelled water table in the central scenario (conductivity 15 m per day, base −30 m, c 0.35, 2020 sealing from GHSL), with arrows showing the direction of groundwater flow. Bottom: the change in water table from 1990 to 2020 in the high spectral sealing scenario (red is a fall).">
+<figcaption>
+<b>Figure 5.</b> Top: the modelled water table in the central scenario
+(conductivity 15 m per day, base −30 m, c 0.35, 2020 sealing from GHSL),
+with arrows showing the direction of groundwater flow. Bottom: the
+change in water table from 1990 to 2020 in the high spectral sealing
+scenario (red is a fall).
+</figcaption>
+</figure>
+<p>From 1990 to 2020 the mean water table in the western barrier falls
+by 4–5 cm with GHSL sealing and by 27–34 cm in the high spectral
+scenario (Figure 6). In the high scenario the largest fall in any cell
+is 0.8–3.7 m, and 26–32 % of cells rise, because rainfall was higher in
+2019–2023. Varying the model’s structure (drain conductance and
+elevation, and how the top is taken) gives 4–6 cm and 26–38 cm, with
+53–91 % of recharge seeping out. Conductivity and aquifer thickness
+change the answer very little.</p>
+<figure class="wide" id="fig-6">
+<img src="assets/figures/scenarios.png" width="1492" height="743" loading="lazy" alt="Mean change in water table in the western barrier, 1990–2020, for each combination of conductivity, aquifer base and recharge share, with sealing from GHSL buildings (blue) and the high spectral scenario (orange).">
+<figcaption>
+<b>Figure 6.</b> Mean change in water table in the western barrier,
+1990–2020, for each combination of conductivity, aquifer base and
+recharge share, with sealing from GHSL buildings (blue) and the high
+spectral scenario (orange).
+</figcaption>
+</figure>
+<h2 id="discussion">4. Discussion</h2>
+<p>The satellite record supports one claim with confidence: the western
+barrier has sealed over since the late 1980s, and the change agrees with
+a separate built-up product. It does not support a precise percentage.
+The earlier figures came from an index whose size depends on its
+weights, on the rainfall used and on a sensor reference that turned out
+to have changed itself; reported as a recharge loss, they also implied a
+physical meaning the index never had.</p>
+<p>The model suggests why sealing may matter less for the water table
+than the index implies. In every scenario the modelled water table sits
+close to the ground and most recharge leaves as seepage to low ground,
+swamps and drainage. A water table held there by seepage responds weakly
+to a change in recharge, so the head change depends mainly on how
+sealing is measured and on the seepage set-up, not on the aquifer’s
+conductivity or thickness. This is a property of the model as well as,
+possibly, of the barrier. If groundwater abstraction from the many
+private boreholes on the barrier has already lowered the water table
+below the ground, seepage would be smaller and the response to sealing
+larger than modelled. Abstraction is probably the larger influence on
+heads in the west, and no data on it were available.</p>
+<p>The flow pattern is a more robust result than the head changes: in
+every scenario groundwater moves outwards from the middle of the barrier
+to the lagoons and the sea. The earlier study’s “percolation corridor”
+along the barrier, a least-cost path across the index, does not describe
+groundwater movement.</p>
+<p>Four limits matter most. There are no groundwater observations, so
+nothing in the model is checked against reality. Sealing is not
+measured: building footprints are too low and the satellite index is a
+relative score. The surface model includes buildings and trees. And the
+model is steady and has no salt water, so it cannot address saltwater
+intrusion.</p>
+<h2 id="conclusions">5. Conclusions</h2>
+<p>The western Lekki–Epe barrier has sealed over since the late 1980s,
+and the satellite evidence for that is consistent with GHSL, but its
+magnitude cannot be pinned down from an index of this kind. In a
+groundwater model run across the plausible range of aquifer properties,
+the water table lies near the ground, groundwater flows across the
+barrier to the lagoons and the sea, and the 1990–2020 change in sealing
+lowers the mean water table in the west by centimetres to a few
+decimetres. Turning this into a hydrogeological result needs water-level
+observations, aquifer tests and abstraction estimates, and, before
+anything is said about salt water, salinity data and a variable-density
+model.</p>
+<h2 id="data-and-code">6. Data and code</h2>
+<p>Every number in this paper is read from
+<code>outputs/index_results.json</code>,
+<code>outputs/modflow_results.json</code>,
+<code>outputs/structure_sensitivity.json</code> and
+<code>outputs/modflow_heads.npz</code> by
+<code>code/pipeline/p06_build_paper.py</code>, which stops if a
+statement in the text is no longer true. The scripts in
+<code>code/pipeline/</code> rebuild every input from open data
+(<code>p01</code>), the index and its sensitivity (<code>p02</code>),
+the groundwater model (<code>p03</code>, <code>p03b</code>, checked by
+<code>test_mf6_dupuit.py</code>) and the figures (<code>p04</code>). The
+earlier notebook, figures and report are kept in the repository as the
+record of the first version.</p>
+<h2 id="references">References</h2>
+<p>Bakker, M., Post, V., Langevin, C. D., Hughes, J. D., White, J. T.,
+Starn, J. J., &amp; Fienen, M. N. (2016). Scripting MODFLOW model
+development using Python and FloPy. <em>Groundwater</em>, 54(5),
+733–739. <a href="https://doi.org/10.1111/gwat.12413"
+class="uri">https://doi.org/10.1111/gwat.12413</a></p>
+<p>Bear, J. (1972). <em>Dynamics of fluids in porous media</em>.
+American Elsevier.</p>
+<p>Beven, K. J., &amp; Kirkby, M. J. (1979). A physically based,
+variable contributing area model of basin hydrology. <em>Hydrological
+Sciences Bulletin</em>, 24(1), 43–69. <a
+href="https://doi.org/10.1080/02626667909491834"
+class="uri">https://doi.org/10.1080/02626667909491834</a></p>
+<p>European Space Agency. (2022). <em>Copernicus DEM</em>. <a
+href="https://doi.org/10.5270/ESA-c5d3d65"
+class="uri">https://doi.org/10.5270/ESA-c5d3d65</a></p>
+<p>Funk, C., Peterson, P., Landsfeld, M., Pedreros, D., Verdin, J.,
+Shukla, S., Husak, G., Rowland, J., Harrison, L., Hoell, A., &amp;
+Michaelsen, J. (2015). The climate hazards infrared precipitation with
+stations—a new environmental record for monitoring extremes.
+<em>Scientific Data</em>, 2, 150066. <a
+href="https://doi.org/10.1038/sdata.2015.66"
+class="uri">https://doi.org/10.1038/sdata.2015.66</a></p>
+<p>Langevin, C. D., Hughes, J. D., Banta, E. R., Niswonger, R. G.,
+Panday, S., &amp; Provost, A. M. (2017). <em>Documentation for the
+MODFLOW 6 groundwater flow model</em> (Techniques and Methods 6-A55).
+U.S. Geological Survey. <a href="https://doi.org/10.3133/tm6A55"
+class="uri">https://doi.org/10.3133/tm6A55</a></p>
+<p>Pesaresi, M. (2023). <em>GHS-BUILT-S R2023A - GHS built-up surface
+grid, derived from Sentinel2 composite and Landsat, multitemporal
+(1975–2030)</em>. European Commission, Joint Research Centre (JRC). <a
+href="https://doi.org/10.2905/9F06F36F-4B11-47EC-ABB0-4F8B7B1D72EA"
+class="uri">https://doi.org/10.2905/9F06F36F-4B11-47EC-ABB0-4F8B7B1D72EA</a></p>
+<p>U.S. Geological Survey. (2020). <em>Landsat 4–5 Thematic Mapper
+Level-2, Collection 2</em>. <a href="https://doi.org/10.5066/P9IAXOVV"
+class="uri">https://doi.org/10.5066/P9IAXOVV</a></p>
+<p>Xu, H. (2006). Modification of normalised difference water index
+(NDWI) to enhance open water features in remotely sensed imagery.
+<em>International Journal of Remote Sensing</em>, 27(14), 3025–3033. <a
+href="https://doi.org/10.1080/01431160600589179"
+class="uri">https://doi.org/10.1080/01431160600589179</a></p>
+<p>Zha, Y., Gao, J., &amp; Ni, S. (2003). Use of normalized difference
+built-up index in automatically mapping urban areas from TM imagery.
+<em>International Journal of Remote Sensing</em>, 24(3), 583–594. <a
+href="https://doi.org/10.1080/01431160304987"
+class="uri">https://doi.org/10.1080/01431160304987</a></p>
 
-  <h2 id="sealing">1. The satellite evidence for sealing</h2>
-  <p>The original study combined five layers into a recharge-potential index with fixed weights and reported its decline. Rebuilt with the same method, the index falls by <span data-v="rpBasin">—</span> % over the whole barrier and <span data-v="rpCore">—</span> % in the western core; the notebook reported <span data-v="nbBasin">—</span> % and <span data-v="nbCore">—</span> % from its Earth Engine inputs. About <span data-v="permShare">—</span> % of the change comes from the built-up term; the terrain terms are the same in both epochs.</p>
-  <figure class="wide"><img src="fig/index_maps.png" width="1660" height="2060" alt="Three maps: the index from 1986 to 1996 imagery, from 2023 to 2024 imagery, and their difference. Decline is concentrated in the west and along the southern barrier, and in a large block in the far south-east inside the area the original study treated as an unchanged rural reference." loading="lazy">
-    <figcaption><b>Figure 2.</b> The index in each epoch and its change. The largest single decline lies in the south-east, inside the eastern 30 % of the grid that the original study used as an unchanged reference for matching the two sensors.</figcaption></figure>
-  <p>How large the decline is depends on choices. Using the rainfall of each epoch instead of 2019–2023 for both removes the basin-wide decline (a rise of <span data-v="rainBasin">—</span> %, because 1986–1996 was drier) but leaves a <span data-v="rainCore">—</span> % decline in the core. With both corrections the declines are <span data-v="bothBasin">—</span> % and <span data-v="bothCore">—</span> %. With both corrections and 2,000 random sets of weights, the core declines in <span data-v="wCoreShare">—</span> % of sets and the whole barrier in <span data-v="wBasinShare">—</span> %; the core change runs from <span data-v="wCoreP5">—</span> to <span data-v="wCoreP95">—</span> % (5th–95th percentile, negative values are rises). Under the original set-up a core decline is guaranteed by construction, so that version is not a test.</p>
-  <figure><img src="fig/index_sensitivity.png" width="1800" height="770" alt="Dot chart of the decline in the index for the whole barrier and for the western core under each change to the method; every version shows a decline in the western core, while the whole-barrier change ranges from a slight rise to a clear decline." loading="lazy">
-    <figcaption><b>Figure 3.</b> A decline in the west appears in every single change tested and in most weight sets; its size is not fixed, and the whole-barrier direction depends on the rainfall used.</figcaption></figure>
-  <p>The satellite signal agrees with a separate built-up product. GHSL uses a different algorithm but partly the same Landsat archive, so this is a cross-check, not independent validation. Over <span data-v="ghslBlocks">—</span> blocks of 300 m, the index falls where GHSL maps new buildings (Spearman ρ <span data-v="ghslRho">—</span>), and GHSL's built-up share of the core rose from <span data-v="built90">—</span> % in 1990 to <span data-v="built20">—</span> % in 2020. But the built-up index also reads bright bare ground as built: about <span data-v="sandKm2">—</span> km² scores as built-up in 2024 where GHSL maps no buildings, which includes bare sand, cleared land, roads and paving.</p>
-  <figure><img src="fig/ghsl_check.png" width="1240" height="680" alt="Box plots of the change in the index against the gain in GHSL built-up fraction; the index falls more where more building was added." loading="lazy">
-    <figcaption><b>Figure 4.</b> Change in the index against new building in GHSL.</figcaption></figure>
-
-  <h2 id="model">2. What sealing could do to the water table</h2>
-  <p>The model treats the barrier as one unconfined sand aquifer drained by the lagoons and the sea (fixed at sea level) and by seepage where the water table reaches the ground. Recharge is a fraction of the rain falling on unsealed ground. Because the aquifer's conductivity, thickness and the recharge fraction are not known here, each was varied: conductivity 5, 15 and 40 m/day, base at −30 or −60 m, recharge fraction 0.20 or 0.35. Sealing was taken two ways: from GHSL buildings, which miss roads and paving and so are likely too low, and from the index's own built-up term taken at face value as a high scenario. The second is not a measured fraction and not a strict upper bound: in <span data-v="specBelowGhsl">—</span> % of model cells its 1990–2020 change is smaller than GHSL's. All <span data-v="runs">—</span> runs converged with a water-budget error under <span data-v="maxDisc">—</span> %.</p>
-  <figure class="wide"><img src="fig/heads.png" width="1800" height="1480" alt="Upper map: modelled water table in the central scenario, highest in the middle of the barrier, with arrows showing flow outwards to the lagoons and the sea. Lower map: change in water table from 1990 to 2020 in the high spectral sealing scenario, falling most in the west and south-east and rising slightly in the north-east." loading="lazy">
-    <figcaption><b>Figure 5.</b> Upper: the water table in the central scenario (mean <span data-v="cHeadMean">—</span> m above sea level, highest <span data-v="cHeadMax">—</span> m). Groundwater flows from the middle of the barrier to the lagoons and the sea, across the barrier, not along it. Lower: the change from 1990 to 2020 in the high spectral sealing scenario.</figcaption></figure>
-  <p>In every scenario the water table lies close to the ground (median depth <span data-v="depthMin">—</span> to <span data-v="depthMax">—</span> m) and between <span data-v="seepMin">—</span> % and <span data-v="seepMax">—</span> % of recharge seeps out at the surface. The model holds the water table near the land surface, which is why conductivity and aquifer thickness hardly change the answer, and why sealing moves heads only a little. In the western core the mean fall from 1990 to 2020 is <span data-v="coreGhslMin">—</span>–<span data-v="coreGhslMax">—</span> cm with GHSL sealing and <span data-v="coreSpecMin">—</span>–<span data-v="coreSpecMax">—</span> cm in the high spectral scenario. Changing the model structure (drain elevation and conductance, how the surface model sets the top) gives <span data-v="stGhslMin">—</span>–<span data-v="stGhslMax">—</span> cm and <span data-v="stSpecMin">—</span>–<span data-v="stSpecMax">—</span> cm, with <span data-v="stSeepMin">—</span>–<span data-v="stSeepMax">—</span> % of recharge seeping out. In the high spectral scenario the largest local fall is <span data-v="fallSpecMin">—</span>–<span data-v="fallSpecMax">—</span> m, and <span data-v="riseSpecMin">—</span>–<span data-v="riseSpecMax">—</span> % of cells rise. If abstraction has already lowered the real water table below the ground, the response to sealing could be larger than modelled here. Rainfall was a little higher in 2019–2023 (<span data-v="rain20">—</span> mm a year) than in 1986–1996 (<span data-v="rain90">—</span> mm), which offsets part of the sealing. Both epochs use today's terrain and today's land and water masks, so the comparison is today's barrier with 1990 sealing against today's barrier with 2020 sealing.</p>
-  <figure><img src="fig/scenarios.png" width="1480" height="740" alt="Dot chart of the mean change in water table in the western core for 12 combinations of conductivity, aquifer base and recharge fraction, under the two sealing estimates; GHSL sealing gives a fall of a few centimetres, the high spectral scenario a fall several times larger." loading="lazy">
-    <figcaption><b>Figure 6.</b> The result depends far more on how sealing is measured than on the aquifer properties, because the model's water table is held near the surface.</figcaption></figure>
-
-  <h2 id="changed">What changed from the original version</h2>
-  <div class="tw"><table>
-    <thead><tr><th>Original claim or method</th><th>Now</th></tr></thead>
-    <tbody>
-      <tr><td>18.1 % basin-wide loss of recharge and over 45 % in the urban core (README, report)</td><td>The notebook's own output was <span data-v="nbBasin">—</span> % and <span data-v="nbCore">—</span> % in an index, not in recharge; the rebuild gives <span data-v="rpBasin">—</span> % and <span data-v="rpCore">—</span> %, and the basin-wide value depends on the rainfall used</td></tr>
-      <tr><td>Recharge in mm/yr = rainfall × 0.35 × index, passed to MODFLOW</td><td>The index is kept as a relative score only; the model takes recharge from rainfall and sealing, with the 0.35 coefficient as one of two scenarios</td></tr>
-      <tr><td>MODFLOW 6 input written, never run; recharge in the wrong units; no boundaries or conductivity</td><td>Model runs; units are metres and days; lagoon and sea boundaries, seepage, conductivity and aquifer base set as scenarios; the solver set-up checked against an analytical solution (without seepage)</td></tr>
-      <tr><td>"TWI" from a smoothed Laplacian</td><td>Named for what it is, a surface-curvature term; removing it changes the core decline to <span data-v="noTwiCore">—</span> %</td></tr>
-      <tr><td>Sensor matching on the eastern 30 % of the grid, assumed unchanged</td><td>That zone changed (largest decline in the domain, more GHSL buildings); matching on GHSL never-built ground tested instead</td></tr>
-      <tr><td>2019–2023 rainfall used for both epochs</td><td>CHIRPS 1986–1996 for the earlier epoch</td></tr>
-      <tr><td>Least-cost "percolation corridor" from Epe to Lekki</td><td>Withdrawn: groundwater flows across the barrier to the lagoons and the sea (Figure 5), and a path over a surface index is not groundwater flow</td></tr>
-    </tbody></table></div>
-
-  <h2 id="limits">Limits</h2>
-  <ul>
-    <li><b>No groundwater observations.</b> Heads, flows and changes are model results under assumed properties; none is checked against wells.</li>
-    <li><b>Sealing is not measured.</b> GHSL counts building footprints only; the satellite term is a relative score that also reads bare ground as built. Neither is a bound on the true sealed fraction.</li>
-    <li><b>Surface model, not ground.</b> The DEM includes buildings and trees; the model top uses a low percentile within each cell to reduce, not remove, that bias.</li>
-    <li><b>Model structure.</b> Most recharge leaves through surface seepage, so the result depends on the drain settings and the surface model as much as on the aquifer; both were varied, not calibrated.</li>
-    <li><b>Steady state.</b> Seasonal recharge, abstraction from boreholes, drainage works, sand-filling and lagoon tides are not represented.</li>
-    <li><b>No salinity.</b> The model has no variable-density flow; it cannot say anything reliable about saltwater intrusion.</li>
-    <li><b>Two epochs.</b> The earlier imagery spans 1986–1996 and is compared with 2023–2024; nothing is said about the path between.</li>
-  </ul>
-
-  <h2 id="next">What would make this a hydrogeology study</h2>
-  <ol>
-    <li>Water levels from existing boreholes or a short monitoring campaign, to calibrate and test the model.</li>
-    <li>Aquifer tests or published borehole logs for conductivity and thickness of the coastal plain sands.</li>
-    <li>An impervious-surface map checked against high-resolution imagery, to replace the two bounds.</li>
-    <li>Abstraction estimates for the barrier, which likely matter more than sealing for heads in the west.</li>
-    <li>Salinity or electrical-conductivity data, and then a variable-density model (SEAWAT or MODFLOW 6 with the buoyancy package), before any statement about saltwater intrusion.</li>
-  </ol>
 </main>
-<footer><div>David Oloyede · Code MIT. Data: Copernicus (DEM, Sentinel-2), USGS (Landsat), Climate Hazards Center (CHIRPS), European Commission JRC (GHSL), read via Microsoft Planetary Computer. Numbers on this page are read from <code>docs/data/site.json</code>, built by <code>code/pipeline/p05_site_data.py</code>.</div></footer>
-<noscript><p style="max-width:720px;margin:12px auto;padding:10px 14px;border:1px solid #d9d9d5;border-radius:6px;font:14px/1.5 system-ui,sans-serif">Turn on JavaScript to see the numbers, which are read from the data file.</p></noscript>
-<script>
-fetch('data/site.json').then(r => r.json()).then(d => {
-  document.querySelectorAll('[data-v]').forEach(el => { if (el.dataset.v in d.values) el.textContent = d.values[el.dataset.v]; });
-}).catch(() => { document.querySelectorAll('[data-v]').forEach(el => { el.title = 'The data file did not load'; }); });
-</script>
+
+<footer>
+    <p>David Oloyede · <a href="https://github.com/oloyededavid">github.com/oloyededavid</a> · Last updated November
+2026</p>
+    <p>Code (MIT) and derived data (CC BY 4.0): <a href="https://github.com/oloyededavid/Coastal-Hydrogeology-Modeling">github.com/oloyededavid/Coastal-Hydrogeology-Modeling</a>. Source data keep their own licences.</p>
+</footer>
+<!-- study-nav:start --><section class="sn-next" aria-label="Next study"><div class="sn-in"><p class="sn-k">Next study</p><a class="sn-card" href="https://oloyededavid.github.io/Observational-Hydrology-Extremes/"><span class="sn-media"><img src="assets/next-study.webp" width="720" height="540" loading="lazy" decoding="async" alt=""></span><span class="sn-t"><b>Hydrological extremes where the gauges are missing</b><span>Floods, drought and future extreme rainfall in two Nigerian basins with few rain gauges.</span></span><span class="sn-arrow" aria-hidden="true">→</span></a><a class="sn-back" href="https://oloyededavid.github.io/geospatial-rs-portfolio/#studies"><span aria-hidden="true">←</span> Back to all studies</a></div></section><!-- study-nav:end -->
 </body>
 </html>
