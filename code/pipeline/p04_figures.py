@@ -1,6 +1,6 @@
 """Stage 4: figures for the report and the website, drawn only from the outputs of stages 1-3.
 
-Writes docs/fig/*.png (website, 2x for sharp display) and figures/audit-2026-11/*.png (repository copies).
+Writes docs/assets/figures/*.png (website, 2x for sharp display) and figures/audit-2026-11/*.png (repository copies).
     python3 code/pipeline/p04_figures.py
 """
 import json
@@ -16,7 +16,7 @@ from matplotlib.colors import BoundaryNorm, ListedColormap, TwoSlopeNorm
 
 ROOT = Path(__file__).resolve().parents[2]
 CACHE, OUT = ROOT / "data_cache", ROOT / "outputs"
-DOCS, REPO_FIG = ROOT / "docs" / "fig", ROOT / "figures" / "audit-2026-11"
+DOCS, REPO_FIG = ROOT / "docs" / "assets" / "figures", ROOT / "figures" / "audit-2026-11"
 DOCS.mkdir(parents=True, exist_ok=True)
 REPO_FIG.mkdir(parents=True, exist_ok=True)
 INK, INK2, RULE, WATER, LAND = "#141412", "#55544e", "#d9d9d5", "#dfe8ef", "#f3f2ee"
@@ -51,7 +51,8 @@ def map_frame(ax, ext, scale_km=10):
     ax.tick_params(length=2)
     x0, y0 = ext[0] + 0.03 * (ext[1] - ext[0]), ext[2] + 0.07 * (ext[3] - ext[2])
     ax.plot([x0, x0 + scale_km * 1000], [y0, y0], color=INK, lw=2.2, solid_capstyle="butt")
-    ax.text(x0 + scale_km * 500, y0 + 0.025 * (ext[3] - ext[2]), f"{scale_km} km", ha="center", fontsize=7, color=INK)
+    ax.annotate(f"{scale_km} km", (x0 + scale_km * 500, y0), xytext=(0, 3), textcoords="offset points", ha="center", va="bottom", fontsize=7, color=INK,
+                bbox=dict(boxstyle="square,pad=0.1", fc="white", ec="none", alpha=0.8))
     xn, yn = ext[1] - 0.03 * (ext[1] - ext[0]), ext[3] - 0.2 * (ext[3] - ext[2])
     ax.annotate("N", xy=(xn, yn + 0.12 * (ext[3] - ext[2])), xytext=(xn, yn), ha="center", fontsize=8, color=INK,
                 arrowprops=dict(arrowstyle="-|>", color=INK, lw=1))
