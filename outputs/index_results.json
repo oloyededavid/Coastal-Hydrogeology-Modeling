@@ -129,6 +129,17 @@
    "1990": 0.0875,
    "2020": 0.1711
   },
-  "ndbi_high_but_not_built_km2_2024": 59.2
+  "ndbi_high_but_not_built_km2_2024": 59.2,
+  "spearman_rho_dperm_ci95_block_bootstrap": [
+   -0.705,
+   -0.609
+  ],
+  "spearman_rho_dindex_corrected_variant": -0.669,
+  "spearman_rho_dindex_ci95_block_bootstrap": [
+   -0.716,
+   -0.61
+  ],
+  "bootstrap_groups_3km": 118,
+  "blocks_dindex": 8278
  }
 }

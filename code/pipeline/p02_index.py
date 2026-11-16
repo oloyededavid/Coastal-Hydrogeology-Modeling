@@ -193,6 +193,26 @@ def main():
     # outputs for figures and the groundwater model (variant: per-epoch rainfall, GHSL shift)
     p95, p24, _ = epoch_terms(a, land, never_built, rain_then=True)
     j95, j24 = index(p95, w_slope, w_twi), index(p24, w_slope, w_twi)
+    # the same check on the quantity Figure 4 plots (change in the whole index, this variant), with a spatial block
+    # bootstrap: 300 m blocks are resampled in 3 km groups (10 x 10 blocks) so that neighbouring blocks, which are not
+    # independent, stay together
+    djdx = block_mean(np.where(land, j24 - j95, np.nan), k)
+    ok2 = np.isfinite(djdx) & np.isfinite(dbuilt) & (frac_land > 0.8)
+    rr, cc = np.nonzero(ok2)
+    grp = (rr // 10) * 1000 + cc // 10
+    groups = [np.nonzero(grp == g_)[0] for g_ in np.unique(grp)]
+    xs, ys_perm, ys_idx = dbuilt[ok2], dperm[ok2], djdx[ok2]
+    rng_b = np.random.default_rng(7)
+    boot = {"perm": [], "index": []}
+    for _ in range(1000):
+        sel = np.concatenate([groups[i] for i in rng_b.integers(0, len(groups), len(groups))])
+        boot["perm"].append(spearmanr(ys_perm[sel], xs[sel]).statistic)
+        boot["index"].append(spearmanr(ys_idx[sel], xs[sel]).statistic)
+    R["ghsl_check"].update({
+        "spearman_rho_dperm_ci95_block_bootstrap": [round(float(v), 3) for v in np.percentile(boot["perm"], [2.5, 97.5])],
+        "spearman_rho_dindex_corrected_variant": round(float(spearmanr(ys_idx, xs).statistic), 3),
+        "spearman_rho_dindex_ci95_block_bootstrap": [round(float(v), 3) for v in np.percentile(boot["index"], [2.5, 97.5])],
+        "bootstrap_groups_3km": len(groups), "blocks_dindex": int(ok2.sum())})
     np.savez_compressed(OUT / "index_arrays.npz", land=land, water=water, core=core, valid=valid,
                         arpi_nb_95=i95.astype("float32"), arpi_nb_24=i24.astype("float32"),
                         arpi_95=j95.astype("float32"), arpi_24=j24.astype("float32"),
