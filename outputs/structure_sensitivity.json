@@ -81,18 +81,18 @@
    "case": "drain 1.0 m below top",
    "sealing": "ghsl",
    "converged": true,
-   "core_head_change_m": -0.044,
-   "head_mean_2020_m": 2.239,
-   "seepage_share_2020": 0.887,
+   "core_head_change_m": -0.042,
+   "head_mean_2020_m": 2.267,
+   "seepage_share_2020": 0.828,
    "percent_discrepancy": 0.0
   },
   {
    "case": "drain 1.0 m below top",
    "sealing": "spectral",
    "converged": true,
-   "core_head_change_m": -0.265,
-   "head_mean_2020_m": 1.87,
-   "seepage_share_2020": 0.911,
+   "core_head_change_m": -0.255,
+   "head_mean_2020_m": 1.907,
+   "seepage_share_2020": 0.812,
    "percent_discrepancy": 0.0
   },
   {
