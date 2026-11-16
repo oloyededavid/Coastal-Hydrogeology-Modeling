@@ -19,7 +19,7 @@ Severity: **Critical** (a headline result is wrong or cannot be checked), **High
 | 7 | Rainfall for 2019–2023 is used for both epochs | Cell 2 | High | Rainfall cannot contribute to change; with 1986–1996 rainfall the basin-wide decline disappears |
 | 8 | "TWI" is a shifted, smoothed negative Laplacian, not upslope area over slope | Cell 5 | Medium | Misnamed term; 20 % of the weight |
 | 9 | The DEM is a surface model (buildings and trees), used for slope, curvature and as the model top | Copernicus GLO-30 | Medium | Urban areas carry building heights; the terrain terms are the same in both epochs, so they only scale the percentages |
-| 10 | Built-up index (NDBI) reads bare sand as built | 59 km² scores as built in 2024 where GHSL maps no buildings (`index_results.json`, `ghsl_check`) | Medium | Sealing over-estimated where land is cleared or sand-filled |
+| 10 | Built-up index (NDBI) reads bare ground as built | 59 km² scores as built in 2024 where GHSL maps no buildings (`index_results.json`, `ghsl_check`) | Medium | Sealing over-estimated where land is cleared, sand-filled or paved-filled |
 | 11 | Least-cost "percolation corridor" presented as subsurface connectivity | Cell 6 | High (terminology) | A path over a surface index is not groundwater flow; modelled flow runs across the barrier, not along it |
 | 12 | "1995 baseline" and "30-year" | Landsat-5 median of 1986–1996 | Low | Interval overstated |
 | 13 | Notebook run out of order | Execution counts 3, 4, 11, 15, 16, 17, 26, 31, 32 | Low | Reproducibility |
@@ -34,7 +34,7 @@ What is computed, illustrative or only described in the original: the index and 
 | 1 | `code/pipeline/p01_inputs.py` | All inputs rebuilt on the same 30 m UTM 31N grid from Planetary Computer (Copernicus DEM, Sentinel-2 L2A with the post-2022 offset removed, Landsat-5 C2 L2), CHIRPS and GHSL; per-scene cache, resumable | Run completed: 14 Sentinel-2 and 29 Landsat-5 scenes (`data_cache/stack_meta.json`); land mask 768.8 km² vs 766.1 km² in the notebook |
 | 1, 5, 6, 7, 8 | `code/pipeline/p02_index.py` | Notebook method reproduced line for line; then one change at a time; 2,000 random weight sets; GHSL check | Run completed; results in `outputs/index_results.json` |
 | 3, 4 | `code/pipeline/p03_modflow.py` | Steady-state MODFLOW 6 model of the barrier at 150 m: lagoon and sea cells at 0 m, inactive cells off the barrier, top from the DEM's 10th percentile per cell, base −30/−60 m, K 5/15/40 m/day, surface seepage drains, recharge = c × rain × (1 − sealed) with c 0.20/0.35 and two sealing estimates | 48 runs, all converged, budget error 0.00 % (`outputs/modflow_results.json`) |
-| 3 | `code/pipeline/test_mf6_dupuit.py` | Analytical check of the solver set-up | Max head error 0.0088 m against Dupuit-Forchheimer; budget imbalance 2.8e-11; pytest 1 passed |
+| 3 | `code/pipeline/test_mf6_dupuit.py` | Analytical check of the solver set-up (no drains, flat top: it tests the solver, not the seepage set-up) | Max head error 0.0088 m against Dupuit-Forchheimer; budget imbalance 2.8e-11; pytest 1 passed |
 | 2, 8, 11, 12 | `README.md`, `docs/index.html` | Results reported from output files; terms corrected; corridor withdrawn; superseded material labelled | Preview page: no unfilled numbers, no console errors, no overflow at 320–1440 px, axe clean |
 | — | `code/pipeline/p04_figures.py`, `p05_site_data.py` | Figures and page numbers generated from outputs | Figures inspected; page numbers read from `docs/data/site.json` |
 
@@ -47,7 +47,8 @@ Not changed, on purpose: the notebook, the report PDF and the original figures (
 | `test_mf6_dupuit.py` | Pass. MODFLOW vs Dupuit max error 0.0088 m; divide head 36.047 vs 36.056 m |
 | `p01_inputs.py` | Pass. Stack 2214 × 926 at 30 m, 11 bands |
 | `p02_index.py` | Pass. Reproduction 3.91 % (basin) and 12.18 % (core) vs notebook 5.16 % and 18.14 %; mean index 0.567 vs 0.427 |
-| `p03_modflow.py` | 48 of 48 converged after the surface-drain conductance was reduced from K·A/1 m to K·A/10 m (with the first setting 5 of 12 scenarios failed to converge); a scenario that converged under both settings gave the same mean head (1.339 vs 1.343 m) |
+| `p03_modflow.py` | 48 of 48 converged after the surface-drain conductance was reduced from K·A/1 m to K·A/10 m (with the first setting 5 of 12 scenarios failed to converge); the scenario K 40, base −60, c 0.2 (GHSL, 2020) gives a mean head of 1.339 m with K·A/1 m and 1.343 m with K·A/10 m (`outputs/structure_sensitivity.json`); this is the scenario with the fewest seeping cells, so it is the weakest test of the drains |
+| `p03b_structure_sensitivity.py` (added after review) | Central scenario, drain length 1/10/100 m, drain 0/0.5/1.0 m below the top, top from the 2nd/10th/50th percentile of the surface model: all 14 runs converged; core head change −4.4 to −5.9 cm (GHSL) and −26.5 to −37.9 cm (high spectral scenario); 53–91 % of recharge seeps out at the surface |
 | Preview | 0 axe violations at 390 and 1440 px; no overflow at 320, 390, 1440 px; all 40 numbers filled |
 
 Why the reproduction does not match the notebook exactly: the inputs differ (Planetary Computer composites instead of the Earth Engine export; slope by finite differences instead of `ee.Terrain.slope`). The absolute index level differs (0.57 vs 0.43), and because the terrain terms are identical in both epochs they sit in the denominator of the percentage change; the percentage therefore partly reflects the index's arbitrary constant terms, not change.
@@ -55,7 +56,9 @@ Why the reproduction does not match the notebook exactly: the inputs differ (Pla
 ## 4. Unresolved limitations
 
 - **No groundwater observations.** No water levels, abstraction, aquifer tests or salinity were available to this study. The model cannot be calibrated or validated; heads are illustrative.
-- **Sealing is bracketed, not measured.** GHSL counts building footprints (misses roads and paving); the NDBI-based term counts bare sand.
+- **Sealing is not measured.** GHSL counts building footprints (misses roads and paving, likely too low); the NDBI-based term is a relative score, not a fraction, and is not a strict bound: in 36 % of model cells its 1990–2020 change is smaller than GHSL's.
+- **The water table is held near the surface by the seepage drains.** Most recharge leaves through them, so the head response to sealing depends on the drain settings and the surface model as much as on the aquifer. If abstraction has lowered the real water table, sealing could matter more than modelled.
+- **Both epochs use today's terrain and land and water masks**, and the head changes include the small rainfall difference between epochs (1,703 vs 1,741 mm a year).
 - **Surface model.** The DEM includes buildings and trees; the low-percentile top reduces but does not remove the bias.
 - **Steady state, no abstraction, no tides, no drainage works, no sand-filling history.**
 - **No variable-density flow.** The Ghyben-Herzberg depth computed in `p03` is indicative only and is not reported as a finding. Saltwater intrusion is outside what this model can address.
@@ -63,10 +66,10 @@ Why the reproduction does not match the notebook exactly: the inputs differ (Pla
 
 ## 5. Research potential
 
-**What the evidence supports now.** A reproducible, open-data account of surface sealing on the barrier since the late 1980s, checked against an independent built-up record, and a transparent scenario model showing that, on a shallow seeping water table, sealing alone moves heads by centimetres to a few decimetres. That is a defensible, modest result.
+**What the evidence supports now.** A reproducible, open-data account of surface sealing on the barrier since the late 1980s, cross-checked against a separate built-up product (GHSL, partly from the same Landsat archive), and a transparent scenario model showing that, on a water table held near the surface by seepage, the combined change in sealing and rainfall between 1990 and 2020 moves heads by centimetres to a few decimetres. That is a defensible, modest result.
 
 **What can be improved with available data.**
-- An impervious-surface map built from Sentinel-2 with a sand class and checked against high-resolution imagery (Google/Esri basemaps for visual accuracy assessment), replacing the two bounds.
+- An impervious-surface map built from Sentinel-2 with a sand class and checked against high-resolution imagery (Google/Esri basemaps for visual accuracy assessment), replacing the two sealing estimates.
 - A time series (Landsat 5/7/8/9, 1986–2024) instead of two epochs, to date the sealing and the sand-filling.
 - Transient monthly recharge from CHIRPS and the model run transiently, to test whether seasonal water-table swings dwarf the sealing signal.
 
@@ -81,7 +84,7 @@ Why the reproduction does not match the notebook exactly: the inputs differ (Pla
 | Criterion | Before | After | Why |
 | :--- | :--: | :--: | :--- |
 | Scientific rigour | 1 | 3 | Claims now match outputs and sensitivity is shown; no validation of groundwater results is possible |
-| Methodological validity | 1 | 3 | Model is physically consistent and checked analytically; index remains a heuristic |
+| Methodological validity | 1 | 3 | Model is physically consistent, its solver checked analytically and its structure varied; index remains a heuristic |
 | Technical implementation | 2 | 4 | Scripts run end to end from open data; model converges in all scenarios |
 | Data quality | 2 | 3 | Same open data plus GHSL and per-epoch rainfall; no ground data |
 | Reproducibility | 1 | 4 | Inputs rebuildable, outputs and figures generated by script |
@@ -94,10 +97,14 @@ Why the reproduction does not match the notebook exactly: the inputs differ (Pla
 | | Before | After |
 | :--- | :--- | :--- |
 | Can it be re-run? | No (inputs never stored) | Yes, from open data, end to end |
-| Headline | "18.1 % basin-wide, >45 % urban-core recharge loss" | Index decline 3.9 % (basin) and 12.2 % (core), direction robust, size depends on choices; water table falls 4–34 cm in the core across scenarios |
-| Groundwater model | Files written, never run, wrong units | 48 converged scenario runs, analytically checked |
+| Headline | "18.1 % basin-wide, >45 % urban-core recharge loss" | Index decline 3.9 % (basin) and 12.2 % (core); a core decline in every single change tested and in 91 % of weight sets, basin-wide direction not robust; water table falls 4–38 cm in the core across scenarios and model structures |
+| Groundwater model | Files written, never run, wrong units | 48 converged scenario runs plus 14 structure tests; solver checked analytically |
 | Flow direction | "Percolation corridor" along the barrier | Flow across the barrier to the lagoons and sea |
-| Independent check | None | GHSL built-up record (ρ −0.66) |
+| Cross-check | None | GHSL built-up record (ρ −0.66; not independent of Landsat) |
 | Limits | Partly stated | Stated in README, page and this file |
 
 The portfolio integration plan for this project and Observational Hydrology is kept in the Observational-Hydrology-Extremes repository: research/audit-2026-11-16/PORTFOLIO_INTEGRATION_PLAN.md (same date and branch).
+
+## 7. Independent review and changes made after it
+
+A scientific review (separate agent, read-only, 16 November) found: the "upper bound" was not a bound (relabelled a high scenario; 36 % of cells computed in `p05_site_data.py`); the head ranges reflect a water table held by surface drains whose settings had not been varied (`p03b_structure_sensitivity.py` added and run); the 1.339 m figure was not in any output (now in `outputs/structure_sensitivity.json`); "sealing alone" ignored the rainfall change; "locally about 1.1 m" was the 5th percentile, not a maximum (now the largest fall and the share of rising cells are reported); GHSL was called independent; the weight test ran under a set-up where a core decline is guaranteed (now re-run with both corrections: core decline in 91 % of 2,000 weight sets, basin-wide 75 %); the 59 km² was called bare sand; the Dupuit test was described more broadly than it is. All were corrected in the files named.
