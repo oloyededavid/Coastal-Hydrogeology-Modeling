@@ -69,7 +69,7 @@ The eastern reference zone did change: GHSL's built-up fraction across it rose f
 
 Giving each epoch its own rainfall turns the barrier-wide decline into a rise of 0.4 %, because 1986–1996 was drier, and leaves a decline of 9.3 % in the west. Taking the sensor shift from never-built ground gives declines of 9.9 % and 17.7 %; no shift gives 6.7 % and 14.7 %; removing the curvature term gives 4.7 % and 15.1 %. With both corrections, the declines are 6.1 % and 15.2 %. Across 2,000 random weight sets with both corrections, the western barrier declines in 91 % of sets and the whole barrier in 75 %; the western change runs from −4.2 % to 30.5 % (5th–95th percentile; negative values are rises).
 
-![**Figure 3.** Decline in the mean index under each change to the method, for the whole barrier (blue) and the western barrier (orange), and the 5th–95th percentile of 2,000 random weight sets under the earlier set-up and with both corrections. Values below zero are rises. Every western value is a decline; the barrier-wide value becomes a rise with each epoch's own rainfall.](figures/audit-2026-11/index_sensitivity.png)
+![**Figure 3.** Decline in the mean index under each change to the method, for the whole barrier (blue) and the western barrier (orange), and the 5th–95th percentile of 2,000 random weight sets under the earlier set-up and with both corrections. Values below zero are rises. Under every single change the western value is a decline; the barrier-wide value becomes a rise with each epoch's own rainfall.](figures/audit-2026-11/index_sensitivity.png)
 
 The direction of the change in the west is consistent; its size is not, and the barrier-wide direction depends on the rainfall used.
 
