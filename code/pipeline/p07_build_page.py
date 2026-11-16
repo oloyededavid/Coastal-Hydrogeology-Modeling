@@ -33,7 +33,8 @@ def figure_html(m):
 def tidy(html):
     parts = re.split(r"(<[^>]+>)", html)
     unit = re.compile(r"(\d) (mm|km|km²|m|cm|%)\b")
-    return "".join(p if p.startswith("<") else unit.sub("\\1\u00a0\\2", p) for p in parts)
+    keep = lambda s: s.replace("Lekki–Epe", "Lekki\u2060–\u2060Epe")  # never break the place name at its dash
+    return "".join(p if p.startswith("<") else keep(unit.sub("\\1\u00a0\\2", p)) for p in parts)
 
 
 def study_links(html, docs):
