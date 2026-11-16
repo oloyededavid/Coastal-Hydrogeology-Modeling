@@ -21,8 +21,10 @@ def run_strip(L=4000.0, ncol=161, h0=30.0, K=10.0, N=1e-3, top=60.0):
     ws = tempfile.mkdtemp()
     sim = flopy.mf6.MFSimulation(sim_name="strip", exe_name=MF6, sim_ws=ws)
     flopy.mf6.ModflowTdis(sim, nper=1, perioddata=[(1.0, 1, 1.0)], time_units="DAYS")
-    flopy.mf6.ModflowIms(sim, complexity="MODERATE", outer_dvclose=1e-8, inner_dvclose=1e-9, linear_acceleration="BICGSTAB")
-    gwf = flopy.mf6.ModflowGwf(sim, modelname="strip", newtonoptions="NEWTON", save_flows=True)
+    # the same solver settings as the barrier model (p03_modflow.run)
+    flopy.mf6.ModflowIms(sim, complexity="COMPLEX", outer_dvclose=1e-5, inner_dvclose=1e-6, outer_maximum=400,
+                         inner_maximum=500, linear_acceleration="BICGSTAB", under_relaxation="DBD")
+    gwf = flopy.mf6.ModflowGwf(sim, modelname="strip", newtonoptions="NEWTON UNDER_RELAXATION", save_flows=True)
     flopy.mf6.ModflowGwfdis(gwf, nlay=1, nrow=1, ncol=ncol, delr=delr, delc=1.0, top=top, botm=0.0, length_units="METERS")
     flopy.mf6.ModflowGwfic(gwf, strt=h0)
     flopy.mf6.ModflowGwfnpf(gwf, icelltype=1, k=K)
