@@ -30,3 +30,4 @@ Working branch: `research-audit` (local only; nothing is pushed). Original files
 - p04 figures, p05 page data, docs/index.html preview (axe clean, no overflow 320-1440, all numbers filled).
 - Page rebuilt in the study-site pattern: paper/template.md, p06_build_paper.py (paper.md, paper.docx), p07_build_page.py (docs/index.html); p05 and docs/data/site.json removed.
 - README rewritten; AUDIT_AND_REPAIR.md written (audit, corrections, tests, limits, research potential, before/after).
+- Second review round (six reviewers): p03c attribution and drain tests, p03b rerun with clipped drains, GHSL block bootstrap, paper revised, phone figures. See AUDIT_AND_REPAIR.md section 8.
