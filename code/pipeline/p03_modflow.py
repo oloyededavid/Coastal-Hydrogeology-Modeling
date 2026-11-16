@@ -95,7 +95,9 @@ def build(a, m, top_pct=10):
                 sealed={"ghsl": built, "spectral": spectral})
 
 
-def run(g, k, base, c, epoch, ws, keep=False, sealing="ghsl", drain_len=10.0, drain_depth=0.0):
+def run(g, k, base, c, epoch, ws, keep=False, sealing="ghsl", drain_len=10.0, drain_depth=0.0, rain_epoch=None, drains=True):
+    """One steady-state run. rain_epoch: take rainfall from another epoch (to separate sealing from rainfall);
+    drains=False removes the seepage drains (to test how much they hold the water table)."""
     nrow, ncol = g["idomain"].shape
     d = 30.0 * F
     sim = flopy.mf6.MFSimulation(sim_name="lekki", exe_name=MF6, sim_ws=str(ws))
@@ -109,11 +111,13 @@ def run(g, k, base, c, epoch, ws, keep=False, sealing="ghsl", drain_len=10.0, dr
     flopy.mf6.ModflowGwfnpf(gwf, icelltype=1, k=k)
     flopy.mf6.ModflowGwfsto(gwf, steady_state={0: True}, iconvert=1)
     flopy.mf6.ModflowGwfchd(gwf, stress_period_data=[[(0, r, cc), 0.0] for r, cc in zip(*np.where(g["chd"]))])
-    rch_mmyr = c * g["rain"][epoch] * (1.0 - g["sealed"][sealing][epoch])
+    rch_mmyr = c * g["rain"][rain_epoch or epoch] * (1.0 - g["sealed"][sealing][epoch])
     rch = np.where(g["active"], rch_mmyr / 1000.0 / 365.25, 0.0)
     flopy.mf6.ModflowGwfrcha(gwf, recharge=rch[None, :, :][0])
     cond = k * d * d / drain_len  # surface leakance: K x cell area over a connection length (10 m by default)
-    flopy.mf6.ModflowGwfdrn(gwf, stress_period_data=[[(0, r, cc), g["top"][r, cc] - drain_depth, cond] for r, cc in zip(*np.where(g["active"]))])
+    # a drain is never set below the 0 m lagoon and sea level, so lowering drains cannot create sinks below sea level
+    if drains:
+        flopy.mf6.ModflowGwfdrn(gwf, stress_period_data=[[(0, r, cc), max(g["top"][r, cc] - drain_depth, 0.0), cond] for r, cc in zip(*np.where(g["active"]))])
     flopy.mf6.ModflowGwfoc(gwf, head_filerecord="lekki.hds", budget_filerecord="lekki.bud",
                            saverecord=[("HEAD", "ALL"), ("BUDGET", "ALL")])
     sim.write_simulation(silent=True)
@@ -128,7 +132,8 @@ def run(g, k, base, c, epoch, ws, keep=False, sealing="ghsl", drain_len=10.0, dr
     h = gwf.output.head().get_data()[0]
     h = np.where(g["active"], h, np.nan)
     bud = gwf.output.budget()
-    q = {t: float(bud.get_data(text=t)[0]["q"].sum()) for t in ("RCH", "CHD", "DRN")}
+    q = {t: float(bud.get_data(text=t)[0]["q"].sum()) for t in ("RCH", "CHD") + (("DRN",) if drains else ())}
+    q.setdefault("DRN", 0.0)
     area_km2 = g["active"].sum() * d * d / 1e6
     out = {"converged": True, "percent_discrepancy": disc,
            "recharge_mean_mm_yr": round(float(rch_mmyr[g["active"]].mean()), 1),
@@ -138,6 +143,7 @@ def run(g, k, base, c, epoch, ws, keep=False, sealing="ghsl", drain_len=10.0, dr
            "head_mean_core_m": round(float(np.nanmean(h[g["core"]])), 3),
            "depth_to_water_median_m": round(float(np.nanmedian(g["top"][g["active"]] - h[g["active"]])), 2),
            "share_cells_seeping": round(float(np.mean((g["top"] - h)[g["active"]] < 0.05)), 3),
+           "share_core_cells_seeping": round(float(np.mean((g["top"] - h)[g["core"]] < 0.05)), 3),
            "interface_depth_median_m_ghyben_herzberg": round(float(np.nanmedian(40 * np.clip(h[g["active"]], 0, None))), 1),
            "active_km2": round(float(area_km2), 1)}
     if keep:
