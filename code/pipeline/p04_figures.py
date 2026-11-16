@@ -106,18 +106,19 @@ def fig_sensitivity(R):
            "without_twi_term": "Without the Laplacian term mislabelled TWI"}
     rows += [(lab[k], v["basin_change_pct"], v["urban_core_change_pct"]) for k, v in R["variants"].items()]
     ws = R["weight_sensitivity"]
-    fig, ax = plt.subplots(figsize=(6.4, 3.9))
-    y = np.arange(len(rows))[::-1] + 1.5
+    fig, ax = plt.subplots(figsize=(6.4, 4.6))
+    y = np.arange(len(rows))[::-1] + 2.5
     for yy, (t, b, u) in zip(y, rows):
         ax.plot([b, u], [yy, yy], color=RULE, lw=1, zorder=1)
         ax.scatter([b], [yy], s=26, color="#1f5fae", zorder=2); ax.scatter([u], [yy], s=26, color="#c2410c", zorder=2)
         ax.text(-0.02, yy, t, va="center", ha="right", fontsize=8, color=INK, transform=ax.get_yaxis_transform())
-    for yy, key, col in ((0.75, "basin_change_pct_p5_p50_p95", "#1f5fae"), (0.25, "urban_core_change_pct_p5_p50_p95", "#c2410c")):
-        p5, p50, p95 = ws[key]
-        ax.plot([p5, p95], [yy, yy], color=col, lw=3, alpha=0.35, solid_capstyle="butt"); ax.scatter([p50], [yy], color=col, s=22)
-    ax.text(-0.02, 0.5, "2,000 random weight sets (5–95 %)", va="center", ha="right", fontsize=8, color=INK, transform=ax.get_yaxis_transform())
+    for base_y, tag, label in ((1.5, "notebook_setup", "Random weights, notebook set-up (5–95 %)"), (0.5, "corrected_setup", "Random weights, both corrections (5–95 %)")):
+        for dy, key, col in ((0.18, "basin_change_pct_p5_p50_p95", "#1f5fae"), (-0.18, "urban_core_change_pct_p5_p50_p95", "#c2410c")):
+            p5, p50, p95 = ws[tag][key]
+            ax.plot([p5, p95], [base_y + dy] * 2, color=col, lw=3, alpha=0.35, solid_capstyle="butt"); ax.scatter([p50], [base_y + dy], color=col, s=22)
+        ax.text(-0.02, base_y, label, va="center", ha="right", fontsize=8, color=INK, transform=ax.get_yaxis_transform())
     ax.axvline(0, color=INK2, lw=0.8)
-    ax.set_xlim(-3, 25); ax.set_yticks([])
+    ax.set_xlim(-16, 32); ax.set_yticks([])
     ax.spines["left"].set_visible(False)
     ax.set_xlabel("Decline in the mean index between the two epochs, % (blue: whole barrier, orange: western 'urban core')")
     ax.set_title("How much the headline change depends on choices in the method", loc="left", color=INK)
@@ -179,9 +180,9 @@ def fig_heads(ext_c, H, Rm):
     key2 = "spectral_k15_b30_c0.35"
     ax = axes[1]; ax.set_facecolor(WATER)
     dd = (H[key2][1] - H[key2][0]) if key2 in H.files else (h20 - h90)
-    im = ax.imshow(np.where(act, dd, np.nan), extent=ext_c, cmap="RdBu", norm=TwoSlopeNorm(0, -1.0, 0.25), interpolation="nearest")
+    im = ax.imshow(np.where(act, dd, np.nan), extent=ext_c, cmap="RdBu", norm=TwoSlopeNorm(0, -1.0, 1.0), interpolation="nearest")
     map_frame(ax, ext_c)
-    ax.set_title("Change in water table 1990 → 2020 with the upper-bound sealing (red: fall, blue: rise)", loc="left", color=INK, fontsize=9)
+    ax.set_title("Change in water table 1990 → 2020, high spectral sealing scenario (red: fall, blue: rise)", loc="left", color=INK, fontsize=9)
     fig.colorbar(im, ax=ax, fraction=0.025, pad=0.01).set_label("m", fontsize=7)
     save(fig, "heads.png")
 
@@ -199,7 +200,7 @@ def fig_scenarios(Rm):
     ax.set_yticklabels([f"K {k:g} m/day · base {b:g} m · c {c}" for k, b, c in combos], fontsize=7)
     ax.axvline(0, color=INK2, lw=0.8)
     ax.set_xlabel("Mean change in water table in the western 'urban core', 1990 → 2020, m")
-    ax.set_title("All 24 scenario pairs. Blue: sealing from GHSL buildings (lower bound).\nOrange: sealing from the index's satellite term (upper bound)",
+    ax.set_title("All 24 scenario pairs. Blue: sealing from GHSL buildings (footprints only, likely too low).\nOrange: high scenario from the index's satellite term (not a bound)",
                  loc="left", color=INK, fontsize=9)
     save(fig, "scenarios.png")
 
