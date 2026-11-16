@@ -1,0 +1,5 @@
+data_cache/
+__pycache__/
+*.pyc
+outputs/*.npz
+outputs/mf6_central/
