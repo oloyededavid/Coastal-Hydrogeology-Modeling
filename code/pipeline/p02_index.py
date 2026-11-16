@@ -149,20 +149,26 @@ def main():
     variants["without_twi_term"] = dict(zip(("basin_change_pct", "urban_core_change_pct"), changes(index(t95, w_slope, w_twi, w_nt), index(t24, w_slope, w_twi, w_nt), land, core)))
     R["variants"] = variants
 
+    # Random weights. Under the notebook's set-up (same rainfall in both epochs, terrain identical) the change is
+    # w_perm * d_perm + w_veg * d_veg, so a core decline is guaranteed for any positive weights when both terms fall.
+    # The corrected set-up (rainfall of each epoch, GHSL sensor shift) lets rainfall push the other way, so it is the
+    # informative test; both are reported, with the minimum.
     rng = np.random.default_rng(42)
-    sb, su = [], []
-    lm, cm = land, core
-    T95 = np.stack([t95["perm"][lm], w_slope[lm], w_twi[lm], t95["rain"][lm], t95["veg"][lm]])
-    T24 = np.stack([t24["perm"][lm], w_slope[lm], w_twi[lm], t24["rain"][lm], t24["veg"][lm]])
-    C95 = np.stack([t95["perm"][cm], w_slope[cm], w_twi[cm], t95["rain"][cm], t95["veg"][cm]])
-    C24 = np.stack([t24["perm"][cm], w_slope[cm], w_twi[cm], t24["rain"][cm], t24["veg"][cm]])
-    m95, m24, n95, n24 = T95.mean(1), T24.mean(1), C95.mean(1), C24.mean(1)
-    for w in rng.dirichlet(np.ones(5), 2000):
-        sb.append((w @ m95 - w @ m24) / (w @ m95) * 100)
-        su.append((w @ n95 - w @ n24) / (w @ n95) * 100)
+    W = rng.dirichlet(np.ones(5), 2000)
+    never_built_ = (np.nan_to_num(a["built_1990"]) < 0.01) & (np.nan_to_num(a["built_2020"]) < 0.01)
+    c95, c24, _ = epoch_terms(a, land, never_built_, rain_then=True)
     q = lambda v: [round(float(x), 2) for x in np.percentile(v, [5, 50, 95])]
-    R["weight_sensitivity"] = {"draws": 2000, "basin_change_pct_p5_p50_p95": q(sb), "urban_core_change_pct_p5_p50_p95": q(su),
-                               "share_of_draws_with_basin_decline": round(float(np.mean(np.array(sb) > 0)), 3)}
+    R["weight_sensitivity"] = {"draws": 2000}
+    for tag, (A95, A24) in {"notebook_setup": (t95, t24), "corrected_setup": (c95, c24)}.items():
+        out = {}
+        for zone, msk in (("basin", land), ("urban_core", core)):
+            T95 = np.stack([A95["perm"][msk], w_slope[msk], w_twi[msk], A95["rain"][msk], A95["veg"][msk]]).mean(1)
+            T24 = np.stack([A24["perm"][msk], w_slope[msk], w_twi[msk], A24["rain"][msk], A24["veg"][msk]]).mean(1)
+            ch = (W @ T95 - W @ T24) / (W @ T95) * 100
+            out[f"{zone}_change_pct_p5_p50_p95"] = q(ch)
+            out[f"{zone}_change_pct_min_max"] = [round(float(ch.min()), 2), round(float(ch.max()), 2)]
+            out[f"{zone}_share_of_draws_with_decline"] = round(float(np.mean(ch > 0)), 3)
+        R["weight_sensitivity"][tag] = out
 
     # Part 3: sealing signal against GHSL on 300 m blocks inside the land mask
     k = 10

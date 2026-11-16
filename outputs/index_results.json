@@ -70,17 +70,50 @@
  },
  "weight_sensitivity": {
   "draws": 2000,
-  "basin_change_pct_p5_p50_p95": [
-   0.91,
-   3.54,
-   6.51
-  ],
-  "urban_core_change_pct_p5_p50_p95": [
-   3.13,
-   12.56,
-   22.73
-  ],
-  "share_of_draws_with_basin_decline": 1.0
+  "notebook_setup": {
+   "basin_change_pct_p5_p50_p95": [
+    0.91,
+    3.54,
+    6.51
+   ],
+   "basin_change_pct_min_max": [
+    0.09,
+    8.46
+   ],
+   "basin_share_of_draws_with_decline": 1.0,
+   "urban_core_change_pct_p5_p50_p95": [
+    3.13,
+    12.56,
+    22.73
+   ],
+   "urban_core_change_pct_min_max": [
+    0.34,
+    27.94
+   ],
+   "urban_core_share_of_draws_with_decline": 1.0
+  },
+  "corrected_setup": {
+   "basin_change_pct_p5_p50_p95": [
+    -13.53,
+    5.33,
+    15.29
+   ],
+   "basin_change_pct_min_max": [
+    -40.6,
+    19.43
+   ],
+   "basin_share_of_draws_with_decline": 0.75,
+   "urban_core_change_pct_p5_p50_p95": [
+    -4.19,
+    15.04,
+    30.48
+   ],
+   "urban_core_change_pct_min_max": [
+    -33.39,
+    38.35
+   ],
+   "urban_core_share_of_draws_with_decline": 0.908
+  }
  },
  "ghsl_check": {
   "blocks": 8278,
