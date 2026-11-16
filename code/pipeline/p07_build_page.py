@@ -1,5 +1,6 @@
 """Stage 7: build docs/index.html from paper/paper.md, so the page and the paper cannot disagree (the same pattern
-as the other study sites). Figures are shown from docs/assets/figures/, where p04_figures.py writes them.
+as the other study sites). The paper points to figures/audit-2026-11/*.png; the page shows the WebP copies that
+p04_figures.py writes to docs/assets/figures/, with a narrower *_phone.webp for small screens.
 
     python3 code/pipeline/p06_build_paper.py && python3 code/pipeline/p07_build_page.py
 """
@@ -8,7 +9,7 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-FIG = re.compile(r"!\[(\*\*Figure (\d+)\.\*\* )?(.*?)\]\(docs/(assets/figures/[^)]+)\)")
+FIG = re.compile(r"!\[(\*\*Figure (\d+)\.\*\* )?(.*?)\]\(figures/audit-2026-11/([^)]+)\.png\)")
 DESCRIPTION = ("Urban sealing on the Lekki-Epe barrier, Lagos, 1986-2024, from open satellite data, and an uncalibrated "
                "MODFLOW 6 scenario model of what it could do to the shallow water table.")
 
@@ -20,11 +21,13 @@ def image_size(rel):
 
 
 def figure_html(m):
-    num, desc, src = m.group(2), m.group(3), m.group(4)
+    num, desc, stem = m.group(2), m.group(3), m.group(4)
     alt = re.sub(r"\*\*", "", desc).replace('"', "&quot;")
+    src, phone = f"assets/figures/{stem}.webp", f"assets/figures/{stem}_phone.webp"
     w, h = image_size(src)
-    return (f'<figure class="wide" id="fig-{num}"><img src="{src}" width="{w}" height="{h}" loading="lazy" alt="{alt}">'
-            f'<figcaption><b>Figure {num}.</b> {desc}</figcaption></figure>')
+    pic = (f'<picture><source media="(max-width: 760px)" srcset="{phone}">'
+           f'<img src="{src}" width="{w}" height="{h}" loading="lazy" alt="{alt}"></picture>')
+    return f'<figure class="wide" id="fig-{num}">{pic}<figcaption><b>Figure {num}.</b> {desc}</figcaption></figure>'
 
 
 def tidy(html):
