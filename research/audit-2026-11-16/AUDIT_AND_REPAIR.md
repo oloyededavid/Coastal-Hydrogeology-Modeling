@@ -99,3 +99,5 @@ Why the reproduction does not match the notebook exactly: the inputs differ (Pla
 | Flow direction | "Percolation corridor" along the barrier | Flow across the barrier to the lagoons and sea |
 | Independent check | None | GHSL built-up record (ρ −0.66) |
 | Limits | Partly stated | Stated in README, page and this file |
+
+The portfolio integration plan for this project and Observational Hydrology is kept in the Observational-Hydrology-Extremes repository: research/audit-2026-11-16/PORTFOLIO_INTEGRATION_PLAN.md (same date and branch).
