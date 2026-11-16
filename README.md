@@ -6,7 +6,7 @@ How much has the land surface of the Lekki–Epe barrier sealed over since the l
 
 The barrier lies between the Lagos and Lekki lagoons and the Atlantic Ocean. This repository holds two versions of the work:
 
-- **The re-analysis (current).** Scripts in [`code/pipeline/`](code/pipeline/) rebuild all inputs from open data, reproduce the original recharge-potential index, test how much its result depends on each choice, check it against an independent built-up map, and run a MODFLOW 6 groundwater model as a set of scenarios. A preview page is in [`docs/`](docs/).
+- **The re-analysis (current).** Scripts in [`code/pipeline/`](code/pipeline/) rebuild all inputs from open data, reproduce the original recharge-potential index, test how much its result depends on each choice, check it against an independent built-up map, and run a MODFLOW 6 groundwater model as a set of scenarios. A paper ([`paper/paper.md`](paper/paper.md), [`paper/paper.docx`](paper/paper.docx)) is built from [`paper/template.md`](paper/template.md) with every number filled from the outputs, and the page in [`docs/`](docs/) is built from the paper.
 - **The original study (superseded, kept for the record).** The Earth Engine notebook [`code/Lekki_Hydro_Study.ipynb`](code/Lekki_Hydro_Study.ipynb), its figures in [`figures/`](figures/) and the report in [`documents/`](documents/). Their errors are listed in [`AUDIT-2026-11-11.md`](AUDIT-2026-11-11.md) and [`research/audit-2026-11-16/`](research/audit-2026-11-16/). The report still gives an 18.1 % basin-wide and over 45 % urban-core loss of recharge; neither figure is supported by any output.
 
 ## Main results (re-analysis)
@@ -44,7 +44,9 @@ python3 code/pipeline/p02_index.py          # index reproduction and sensitivity
 python3 code/pipeline/p03_modflow.py        # 48 groundwater model runs (about 30 minutes)
 python3 code/pipeline/p03b_structure_sensitivity.py  # drain and model-top sensitivity (run from code/pipeline/)
 python3 code/pipeline/p04_figures.py        # figures
-python3 code/pipeline/p05_site_data.py      # numbers for the preview page
+python3 code/pipeline/p06_build_paper.py    # paper/paper.md from paper/template.md; stops if a statement no longer holds
+pandoc paper/paper.md -o paper/paper.docx --resource-path=.   # Word version
+python3 code/pipeline/p07_build_page.py     # docs/index.html from paper.md (pandoc)
 python3 -m http.server -d docs 8811         # preview at http://localhost:8811/
 ```
 

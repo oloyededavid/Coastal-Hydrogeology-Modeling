@@ -28,4 +28,5 @@ Working branch: `research-audit` (local only; nothing is pushed). Original files
   0.5 m below ground all 48 runs (12 parameter sets x 2 sealing estimates x 2 epochs) converge, budget 0.00 %.
   Core water-table change 1990->2020: -4 to -5 cm (GHSL sealing), -27 to -34 cm (satellite upper bound).
 - p04 figures, p05 page data, docs/index.html preview (axe clean, no overflow 320-1440, all numbers filled).
+- Page rebuilt in the study-site pattern: paper/template.md, p06_build_paper.py (paper.md, paper.docx), p07_build_page.py (docs/index.html); p05 and docs/data/site.json removed.
 - README rewritten; AUDIT_AND_REPAIR.md written (audit, corrections, tests, limits, research potential, before/after).
