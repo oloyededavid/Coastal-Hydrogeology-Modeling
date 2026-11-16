@@ -24,10 +24,11 @@ s the sealed fraction of the epoch and c the fraction of rainfall on unsealed gr
 0.20 or 0.35 (scenarios; 0.35 is the notebook's coefficient). Sealed ground gives no recharge (leaking pipes and
 soakaways are ignored). Two estimates of s bracket sealing:
   ghsl      GHSL built-up surface fraction, 1990 and 2020. Building footprints only, so roads and paving are
-            missed: a lower bound.
+            missed: likely too low.
   spectral  1 minus the index's own permeability term (1 - normalised NDBI) for 1990 and 2024, the satellite
             signal the recharge-potential index is built on, taken at face value. NDBI also flags bare sand and the
-            term is a relative 0-1 score, not a measured fraction: an upper bound.
+            term is a relative 0-1 score, not a measured fraction: a high scenario, not a strict bound (in about a
+            third of cells its 1990-2020 change is smaller than the GHSL change).
 Seepage: a drain at the land surface in every active cell (conductance K x cell area / 10 m), so the water table
 cannot rise far above the ground; drain outflow stands for discharge to swamps, channels and drainage.
 Interface: an indicative fresh-salt interface depth from the Ghyben-Herzberg relation (40 x head above sea level),
@@ -74,7 +75,7 @@ def load():
     return a, m, res
 
 
-def build(a, m):
+def build(a, m, top_pct=10):
     land, water, core = m["land"].astype(float), m["water"].astype(float), m["core"].astype(float)
     fl, fw, fc = coarse(land), coarse(water), coarse(core)
     active = fl >= 0.5
@@ -83,7 +84,7 @@ def build(a, m):
     chd = (fw >= 0.5) & ~active & binary_dilation(active, structure=np.ones((3, 3)))
     idomain = np.where(active | chd, 1, 0).astype(int)
     dem = np.where(m["land"], a["dem"], np.nan)
-    top = coarse(dem, lambda x, axis: np.nanpercentile(x, 10, axis=axis))
+    top = coarse(dem, lambda x, axis: np.nanpercentile(x, top_pct, axis=axis))
     top = np.where(np.isfinite(top), top, 0.5)
     top = np.where(chd, 0.0, np.maximum(top, 0.2))
     built = {1990: coarse(np.nan_to_num(a["built_1990"])), 2020: coarse(np.nan_to_num(a["built_2020"]))}
@@ -94,7 +95,7 @@ def build(a, m):
                 sealed={"ghsl": built, "spectral": spectral})
 
 
-def run(g, k, base, c, epoch, ws, keep=False, sealing="ghsl"):
+def run(g, k, base, c, epoch, ws, keep=False, sealing="ghsl", drain_len=10.0, drain_depth=0.0):
     nrow, ncol = g["idomain"].shape
     d = 30.0 * F
     sim = flopy.mf6.MFSimulation(sim_name="lekki", exe_name=MF6, sim_ws=str(ws))
@@ -111,8 +112,8 @@ def run(g, k, base, c, epoch, ws, keep=False, sealing="ghsl"):
     rch_mmyr = c * g["rain"][epoch] * (1.0 - g["sealed"][sealing][epoch])
     rch = np.where(g["active"], rch_mmyr / 1000.0 / 365.25, 0.0)
     flopy.mf6.ModflowGwfrcha(gwf, recharge=rch[None, :, :][0])
-    cond = k * d * d / 10.0  # surface leakance: K x cell area over a 10 m connection length
-    flopy.mf6.ModflowGwfdrn(gwf, stress_period_data=[[(0, r, cc), g["top"][r, cc], cond] for r, cc in zip(*np.where(g["active"]))])
+    cond = k * d * d / drain_len  # surface leakance: K x cell area over a connection length (10 m by default)
+    flopy.mf6.ModflowGwfdrn(gwf, stress_period_data=[[(0, r, cc), g["top"][r, cc] - drain_depth, cond] for r, cc in zip(*np.where(g["active"]))])
     flopy.mf6.ModflowGwfoc(gwf, head_filerecord="lekki.hds", budget_filerecord="lekki.bud",
                            saverecord=[("HEAD", "ALL"), ("BUDGET", "ALL")])
     sim.write_simulation(silent=True)
