@@ -47,6 +47,10 @@ def study_links(html, docs):
         block = f.read_text(encoding="utf-8").strip()
         html = re.sub(rf"<!-- {key}:start -->.*?<!-- {key}:end -->\n?", "", html, flags=re.S)
         html = re.sub(r"(<body[^>]*>)", lambda m: m.group(1) + "\n" + block, html, count=1) if where == "top" else html.replace("</body>", block + "\n</body>", 1)
+    f = docs / "assets" / "study-others.html"  # the "Other studies" line in the footer, kept in place
+    if f.exists():
+        block = f.read_text(encoding="utf-8").strip()
+        html = re.sub(r"<!-- study-others:start -->.*?<!-- study-others:end -->", lambda m: block, html, flags=re.S)
     return html
 
 
