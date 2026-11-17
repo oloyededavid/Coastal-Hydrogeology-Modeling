@@ -31,7 +31,7 @@ table.">
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=zodiak@500,700&amp;display=swap">
     <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
+<body data-counter="oloyededavid-lekki-epe-groundwater-v1" data-store="lekki-epe-reaction-1">
 <!-- study-bar:start --><style>
 .sn-bar{font:400 14px/1.4 'Range Dash','Satoshi',system-ui,-apple-system,'Segoe UI',sans-serif;background:#fff;border-bottom:1px solid #e5e5e1;color:#141412;position:relative;z-index:1000}
 .sn-bar .sn-in{max-width:1240px;margin:0 auto;padding:4px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -75,6 +75,7 @@ table.">
         <a href="#discussion">Discussion</a>
         <a href="#references">References</a>
     </nav>
+    <div class="progress" aria-hidden="true"><span id="progress"></span></div>
 </header>
 
 <main class="article" id="top">
@@ -421,8 +422,26 @@ or thickness. Turning this into a hydrogeological result needs
 water-level observations, aquifer tests, abstraction estimates and an
 estimate of urban return flows, and, before anything is said about salt
 water, salinity data and a variable-density model.</p>
-<h2 id="data-and-code">6. Data and code</h2>
-<p>Every number in this paper is read from
+<!-- page-end:start -->
+<section id="key-terms" aria-labelledby="h-terms">
+    <h2 id="h-terms">Key terms</h2>
+    <dl class="glossary">
+        <dt>Water table</dt><dd>The level below which the ground is full of water. Wells draw from below it.</dd>
+        <dt>Recharge</dt><dd>Water that soaks down to the water table and refills the aquifer. Roofs and roads reduce it, which is why sealing matters; leaking pipes and septic systems can add some back, and this study did not measure them.</dd>
+        <dt>Sealing</dt><dd>Covering the ground with roofs, roads and paving. The sealed fraction is the share of a cell that is covered.</dd>
+        <dt>NDBI</dt><dd>Normalised difference built-up index, from satellite images. It is higher over roofs and roads, but also over bright bare sand.</dd>
+        <dt>Recharge-potential index</dt><dd>A weighted score from 0 to 1, built from five layers. It is a relative score, not a measure of recharge.</dd>
+        <dt>GHSL</dt><dd>Global Human Settlement Layer, a built-up map from the European Commission. It is used as a second check, but it is not fully independent: it is partly made from the same Landsat archive.</dd>
+        <dt>MODFLOW 6</dt><dd>A groundwater flow model from the US Geological Survey. Here it is run as a set of scenarios, because no water levels were available to calibrate it.</dd>
+        <dt>Seepage</dt><dd>Groundwater leaving at the surface where the water table reaches the ground. In the model, drains remove this water; when recharge falls, less water seeps out, so the water table falls less. This setting controls the size of the modelled fall.</dd>
+        <dt>Hydraulic conductivity</dt><dd>How easily water moves through the sand. Tested at 5, 15 and 40 m per day.</dd>
+        <dt>Western barrier</dt><dd>The western 45 % of the study grid, used for comparisons. The earlier study called it the urban core.</dd>
+    </dl>
+</section>
+
+<section id="data-code" aria-labelledby="h-dc">
+    <h2 id="h-dc">Data, code and citation</h2>
+    <p>Every number in this paper is read from
 <code>outputs/index_results.json</code>,
 <code>outputs/modflow_results.json</code>,
 <code>outputs/structure_sensitivity.json</code>,
@@ -436,82 +455,73 @@ the groundwater model (<code>p03</code>, <code>p03b</code>,
 <code>p03c</code>, checked by <code>test_mf6_dupuit.py</code>) and the
 figures (<code>p04</code>). The earlier notebook, figures and report are
 kept in the repository as the record of the first version.</p>
-<h2 id="references">References</h2>
-<p>Bakker, M., Post, V., Langevin, C. D., Hughes, J. D., White, J. T.,
-Starn, J. J., &amp; Fienen, M. N. (2016). Scripting MODFLOW model
-development using Python and FloPy. <em>Groundwater</em>,
-<em>54</em>(5), 733–739. <a href="https://doi.org/10.1111/gwat.12413"
-class="uri">https://doi.org/10.1111/gwat.12413</a></p>
-<p>Bear, J. (1972). <em>Dynamics of fluids in porous media</em>.
-American Elsevier.</p>
-<p>Beven, K. J., &amp; Kirkby, M. J. (1979). A physically based,
-variable contributing area model of basin hydrology. <em>Hydrological
-Sciences Bulletin</em>, <em>24</em>(1), 43–69. <a
-href="https://doi.org/10.1080/02626667909491834"
-class="uri">https://doi.org/10.1080/02626667909491834</a></p>
-<p>Earth Resources Observation and Science Center. (2020). <em>Landsat
-4–5 Thematic Mapper Level-2, Collection 2</em> [Data set]. U.S.
-Geological Survey. <a href="https://doi.org/10.5066/P9IAXOVV"
-class="uri">https://doi.org/10.5066/P9IAXOVV</a></p>
-<p>European Space Agency &amp; Airbus. (2022). <em>Copernicus DEM</em>
-[Data set]. European Space Agency. <a
-href="https://doi.org/10.5270/ESA-c5d3d65"
-class="uri">https://doi.org/10.5270/ESA-c5d3d65</a></p>
-<p>European Space Agency. (2022). <em>Sentinel-2 MSI Level-2A BOA
-reflectance</em> [Data set]. <a
-href="https://doi.org/10.5270/S2_-znk9xsj"
-class="uri">https://doi.org/10.5270/S2_-znk9xsj</a></p>
-<p>Funk, C., Peterson, P., Landsfeld, M., Pedreros, D., Verdin, J.,
-Shukla, S., Husak, G., Rowland, J., Harrison, L., Hoell, A., &amp;
-Michaelsen, J. (2015). The climate hazards infrared precipitation with
-stations—a new environmental record for monitoring extremes.
-<em>Scientific Data</em>, <em>2</em>, Article 150066. <a
-href="https://doi.org/10.1038/sdata.2015.66"
-class="uri">https://doi.org/10.1038/sdata.2015.66</a></p>
-<p>Langevin, C. D., Hughes, J. D., Banta, E. R., Niswonger, R. G.,
-Panday, S., &amp; Provost, A. M. (2017). <em>Documentation for the
-MODFLOW 6 groundwater flow model</em> (Techniques and Methods 6-A55).
-U.S. Geological Survey. <a href="https://doi.org/10.3133/tm6A55"
-class="uri">https://doi.org/10.3133/tm6A55</a></p>
-<p>Microsoft Open Source, McFarland, M., Emanuele, R., Morris, D., &amp;
-Augspurger, T. (2022). <em>microsoft/PlanetaryComputer: October
-2022</em> [Computer software]. Zenodo. <a
-href="https://doi.org/10.5281/zenodo.7261897"
-class="uri">https://doi.org/10.5281/zenodo.7261897</a></p>
-<p>Oloyede, D. (2026). <em>A multi-decadal assessment of recharge
-attenuation and subsurface percolation impedance in coastal aquifers: A
-cloud-native Earth observation and numerical workflow in the Lekki-Epe
-basin, Lagos, Nigeria</em> [Unpublished report, superseded].
-<code>documents/Lekki_Coastal_Aquifer_Recharge_Report.pdf</code> in this
-repository.</p>
-<p>Pesaresi, M. (2023). <em>GHS-BUILT-S R2023A - GHS built-up surface
-grid, derived from Sentinel2 composite and Landsat, multitemporal
-(1975–2030)</em> [Data set]. European Commission, Joint Research Centre.
-<a href="https://doi.org/10.2905/9F06F36F-4B11-47EC-ABB0-4F8B7B1D72EA"
-class="uri">https://doi.org/10.2905/9F06F36F-4B11-47EC-ABB0-4F8B7B1D72EA</a></p>
-<p>Tucker, C. J. (1979). Red and photographic infrared linear
-combinations for monitoring vegetation. <em>Remote Sensing of
-Environment</em>, <em>8</em>(2), 127–150. <a
-href="https://doi.org/10.1016/0034-4257(79)90013-0"
-class="uri">https://doi.org/10.1016/0034-4257(79)90013-0</a></p>
-<p>Xu, H. (2006). Modification of normalised difference water index
-(NDWI) to enhance open water features in remotely sensed imagery.
-<em>International Journal of Remote Sensing</em>, <em>27</em>(14),
-3025–3033. <a href="https://doi.org/10.1080/01431160600589179"
-class="uri">https://doi.org/10.1080/01431160600589179</a></p>
-<p>Zha, Y., Gao, J., &amp; Ni, S. (2003). Use of normalized difference
-built-up index in automatically mapping urban areas from TM imagery.
-<em>International Journal of Remote Sensing</em>, <em>24</em>(3),
-583–594. <a href="https://doi.org/10.1080/01431160304987"
-class="uri">https://doi.org/10.1080/01431160304987</a></p>
+    <ul class="downloads">
+        <li><a href="https://github.com/oloyededavid/Coastal-Hydrogeology-Modeling/blob/main/outputs/index_results.json">index_results.json</a><span>Index, its sensitivity and the GHSL check</span></li>
+        <li><a href="https://github.com/oloyededavid/Coastal-Hydrogeology-Modeling/blob/main/outputs/modflow_results.json">modflow_results.json</a><span>All 48 groundwater model runs</span></li>
+        <li><a href="https://github.com/oloyededavid/Coastal-Hydrogeology-Modeling/blob/main/outputs/attribution.json">attribution.json</a><span>Sealing alone, and the seepage tests</span></li>
+        <li><a href="https://github.com/oloyededavid/Coastal-Hydrogeology-Modeling/blob/main/outputs/structure_sensitivity.json">structure_sensitivity.json</a><span>Drain and model-top tests</span></li>
+        <li><a href="https://github.com/oloyededavid/Coastal-Hydrogeology-Modeling/raw/main/paper/paper.docx">Paper (Word)</a><span>Same text, for printing or comment</span></li>
+        <li><a href="https://github.com/oloyededavid/Coastal-Hydrogeology-Modeling">Repository</a><span>Scripts, tests and the audit record</span></li>
+        <li><a href="https://github.com/oloyededavid/Coastal-Hydrogeology-Modeling/blob/main/documents/Lekki_Coastal_Aquifer_Recharge_Report.pdf">Original report, October 2026 (PDF)</a><span>Superseded</span></li>
+    </ul>
+    <h3 id="cite">How to cite</h3>
+    <div class="citation">
+        <p id="cite-text">Oloyede, D. O. (2026). <i>Urban sealing and the shallow water table of the Lekki–Epe barrier, Lagos, 1986–2024</i>. https://github.com/oloyededavid/Coastal-Hydrogeology-Modeling</p>
+        <button type="button" class="button" id="copy-cite">Copy citation</button>
+    </div>
+</section>
 
+<section class="note" aria-labelledby="h-note">
+    <h2 id="h-note">A note from me</h2>
+    <p>Thank you for reading. The first version of this study reported an 18.1 % loss of recharge on the barrier. When I traced that number, I found it was the change in an index, not in recharge; the notebook behind it had printed 5.2 % for the barrier, and 18.1 % was its value for the western part; and the groundwater model I had written had never run. This page is the rebuild: the same index made from open data and tested one choice at a time, and a model that runs.</p>
+    <p>The model taught me the most. In the model, how far the water table falls depends less on the aquifer than on how water seeps out at the surface, and I have no measurements to pin that down. So the answer here is a range of scenarios, not a forecast.</p>
+    <p>If you have water-level records from Lekki or Epe, or see something I missed, I would like to hear it: <a href="https://github.com/oloyededavid/Coastal-Hydrogeology-Modeling/issues">open an issue on the repository</a>.</p>
+    <p class="sign">David</p>
+</section>
+
+<section id="feedback" class="feedback" aria-labelledby="h-fb">
+    <h2 id="h-fb">Was this research useful?</h2>
+    <div class="react-row">
+        <div class="reactions" role="group" aria-labelledby="h-fb">
+            <button type="button" class="button react" data-react="Useful" aria-pressed="false">Useful <span class="rc"></span></button>
+            <button type="button" class="button react" data-react="Interesting" aria-pressed="false">Interesting <span class="rc"></span></button>
+            <button type="button" class="button react" data-react="Needs clarity" aria-pressed="false">Needs clarity <span class="rc"></span></button>
+        </div>
+        <span class="react-status" id="react-status" role="status"></span>
+    </div>
+    <p class="react-note">One reaction per browser. Counts are anonymous and kept by a public counter.</p>
+</section>
+<!-- page-end:end -->
+<h2 id="references">References</h2>
+<ol class="refs" role="list">
+<li>Bakker, M., Post, V., Langevin, C. D., Hughes, J. D., White, J. T., Starn, J. J., &amp; Fienen, M. N. (2016). Scripting MODFLOW model development using Python and FloPy. <em>Groundwater</em>, <em>54</em>(5), 733–739. <a href="https://doi.org/10.1111/gwat.12413">doi:10.1111/gwat.12413</a></li>
+<li>Bear, J. (1972). <em>Dynamics of fluids in porous media</em>. American Elsevier.</li>
+<li>Beven, K. J., &amp; Kirkby, M. J. (1979). A physically based, variable contributing area model of basin hydrology. <em>Hydrological Sciences Bulletin</em>, <em>24</em>(1), 43–69. <a href="https://doi.org/10.1080/02626667909491834">doi:10.1080/02626667909491834</a></li>
+<li>Earth Resources Observation and Science Center. (2020). <em>Landsat 4–5 Thematic Mapper Level-2, Collection 2</em> [Data set]. U.S. Geological Survey. <a href="https://doi.org/10.5066/P9IAXOVV">doi:10.5066/P9IAXOVV</a></li>
+<li>European Space Agency &amp; Airbus. (2022). <em>Copernicus DEM</em> [Data set]. European Space Agency. <a href="https://doi.org/10.5270/ESA-c5d3d65">doi:10.5270/ESA-c5d3d65</a></li>
+<li>European Space Agency. (2022). <em>Sentinel-2 MSI Level-2A BOA reflectance</em> [Data set]. <a href="https://doi.org/10.5270/S2_-znk9xsj">doi:10.5270/S2_-znk9xsj</a></li>
+<li>Funk, C., Peterson, P., Landsfeld, M., Pedreros, D., Verdin, J., Shukla, S., Husak, G., Rowland, J., Harrison, L., Hoell, A., &amp; Michaelsen, J. (2015). The climate hazards infrared precipitation with stations—a new environmental record for monitoring extremes. <em>Scientific Data</em>, <em>2</em>, Article 150066. <a href="https://doi.org/10.1038/sdata.2015.66">doi:10.1038/sdata.2015.66</a></li>
+<li>Langevin, C. D., Hughes, J. D., Banta, E. R., Niswonger, R. G., Panday, S., &amp; Provost, A. M. (2017). <em>Documentation for the MODFLOW 6 groundwater flow model</em> (Techniques and Methods 6-A55). U.S. Geological Survey. <a href="https://doi.org/10.3133/tm6A55">doi:10.3133/tm6A55</a></li>
+<li>Microsoft Open Source, McFarland, M., Emanuele, R., Morris, D., &amp; Augspurger, T. (2022). <em>microsoft/PlanetaryComputer: October 2022</em> [Computer software]. Zenodo. <a href="https://doi.org/10.5281/zenodo.7261897">doi:10.5281/zenodo.7261897</a></li>
+<li>Oloyede, D. (2026). <em>A multi-decadal assessment of recharge attenuation and subsurface percolation impedance in coastal aquifers: A cloud-native Earth observation and numerical workflow in the Lekki-Epe basin, Lagos, Nigeria</em> [Unpublished report, superseded]. <code>documents/Lekki_Coastal_Aquifer_Recharge_Report.pdf</code> in this repository.</li>
+<li>Pesaresi, M. (2023). <em>GHS-BUILT-S R2023A - GHS built-up surface grid, derived from Sentinel2 composite and Landsat, multitemporal (1975–2030)</em> [Data set]. European Commission, Joint Research Centre. <a href="https://doi.org/10.2905/9F06F36F-4B11-47EC-ABB0-4F8B7B1D72EA">doi:10.2905/9F06F36F-4B11-47EC-ABB0-4F8B7B1D72EA</a></li>
+<li>Tucker, C. J. (1979). Red and photographic infrared linear combinations for monitoring vegetation. <em>Remote Sensing of Environment</em>, <em>8</em>(2), 127–150. <a href="https://doi.org/10.1016/0034-4257(79)90013-0">doi:10.1016/0034-4257(79)90013-0</a></li>
+<li>Xu, H. (2006). Modification of normalised difference water index (NDWI) to enhance open water features in remotely sensed imagery. <em>International Journal of Remote Sensing</em>, <em>27</em>(14), 3025–3033. <a href="https://doi.org/10.1080/01431160600589179">doi:10.1080/01431160600589179</a></li>
+<li>Zha, Y., Gao, J., &amp; Ni, S. (2003). Use of normalized difference built-up index in automatically mapping urban areas from TM imagery. <em>International Journal of Remote Sensing</em>, <em>24</em>(3), 583–594. <a href="https://doi.org/10.1080/01431160304987">doi:10.1080/01431160304987</a></li>
+</ol>
 </main>
 
+<button type="button" class="to-top" id="to-top" aria-label="Back to top" hidden><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
 <footer>
-    <p>David Oloyede · <a href="https://github.com/oloyededavid">github.com/oloyededavid</a> · Last updated November
-2026</p>
-    <p>Code (MIT) and derived data (CC BY 4.0): <a href="https://github.com/oloyededavid/Coastal-Hydrogeology-Modeling">github.com/oloyededavid/Coastal-Hydrogeology-Modeling</a>. Source data keep their own licences.</p>
+    <div class="inner">
+        <p class="sig"><span>David Oloyede</span><span><a href="https://github.com/oloyededavid">github.com/oloyededavid</a></span><span>Last updated November
+2026</span><span class="views" id="views" hidden></span></p>
+        <p>Code MIT, derived data CC BY 4.0. Source data keep their own terms: Landsat (USGS), Sentinel-2 (ESA Copernicus), Copernicus DEM, CHIRPS (Climate Hazards Center, UC Santa Barbara), GHSL (European Commission, JRC). Read via Microsoft Planetary Computer.</p>
+        <!-- study-others:start --><p class="others">Other studies: <a href="https://oloyededavid.github.io/Observational-Hydrology-Extremes/">Nigeria floods, drought and design rainfall</a> · <a href="https://oloyededavid.github.io/Ogun-Catchment-Coast-Observatory/">Ogun surface water</a> · <a href="https://oloyededavid.github.io/Oueme-Ogun-Groundwater-Recharge/">Ouémé–Ogun recharge</a> · <a href="https://oloyededavid.github.io/Groundwater-Storage-Gravimetry/">Lake Chad water storage</a> · <a href="https://oloyededavid.github.io/Lagos-Urban-Heat-Analytics/">Lagos urban heat</a></p><!-- study-others:end -->
+    </div>
 </footer>
+<script src="assets/study.js"></script>
 <!-- study-nav:start --><section class="sn-next" aria-label="Next study"><div class="sn-in"><p class="sn-k">Next study</p><a class="sn-card" href="https://oloyededavid.github.io/Observational-Hydrology-Extremes/"><span class="sn-media"><img src="assets/next-study.webp" width="720" height="540" loading="lazy" decoding="async" alt=""></span><span class="sn-t"><b>Hydrological extremes where the gauges are missing</b><span>Floods, drought and future extreme rainfall in two Nigerian basins with few rain gauges.</span></span><span class="sn-arrow" aria-hidden="true">→</span></a><a class="sn-back" href="https://oloyededavid.github.io/geospatial-rs-portfolio/#studies"><span aria-hidden="true">←</span> Back to all studies</a></div></section><!-- study-nav:end -->
 </body>
 </html>
